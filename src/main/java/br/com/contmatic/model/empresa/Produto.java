@@ -24,106 +24,107 @@ import static br.com.contmatic.model.utils.validacao.Util.validarApenasAlfanumer
 import static br.com.contmatic.model.utils.validacao.Util.validarEspacos;
 import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCaracteresString;
-import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeValorFloat;
+import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeValorBigDecimal;
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeValorInt;
 import static br.com.contmatic.model.utils.validacao.Util.validarTexto;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import br.com.contmatic.model.auditoria.Auditoria;
 
 public class Produto extends Auditoria {
 
-	Float preco;
+    BigDecimal preco;
 
-	String codigoBarra;
+    String codigoBarra;
 
-	Integer quantidade;
+    Integer quantidade;
 
-	String descricao;
-	
-	public Produto(String codigoBarra) {
-		setCodigoBarra(codigoBarra);
-	}
+    String descricao;
 
-	public Produto(String codigoBarra, Float preco, Integer quantidade, String descricao) {
-		super();
-		setPreco(preco);
-		setCodigoBarra(codigoBarra);
-		setQuantidade(quantidade);
-		setDescricao(descricao);
-	}
-	
-	public Float getPreco() {
-		return this.preco;
-	}
+    public Produto(String codigoBarra) {
+        setCodigoBarra(codigoBarra);
+    }
 
-	public void setPreco(Float preco) {
-		validarNulo(preco, MSG_PRECO_NULO);
-		validarQuantidadeValorFloat(preco, TAMANHO_PRECO_MAX, TAMANHO_PRECO_MIN, MSG_PRECO_VALOR_INVALIDO);
-		this.preco = preco;
-	}
+    public Produto(String codigoBarra, BigDecimal preco, Integer quantidade, String descricao) {
+        super();
+        setPreco(preco);
+        setCodigoBarra(codigoBarra);
+        setQuantidade(quantidade);
+        setDescricao(descricao);
+    }
 
-	public String getCodigoBarra() {
-		return this.codigoBarra;
-	}
+    public BigDecimal getPreco() {
+        return this.preco;
+    }
 
-	public void setCodigoBarra(String codigoBarra) {
-		validarNulo(codigoBarra, MSG_CODIGO_BARRA_NULO);
-		validarEspacos(codigoBarra, MSG_CODIGO_BARRA_BRANCO);
-		validarQuantidadeCaracteresString(codigoBarra, TAMANHO_CODIGO_BARRA_MAX, TAMANHO_CODIGO_BARRA_MIN, MSG_CODIGO_BARRA_QTDE_CARACTERES);
-		validarApenasAlfanumericos(codigoBarra, MSG_CODIGO_BARRA_CARACTERES_INVALIDO);
-		this.codigoBarra = codigoBarra;
-	}
+    public void setPreco(BigDecimal preco) {
+        validarNulo(preco, MSG_PRECO_NULO);
+        validarQuantidadeValorBigDecimal(preco, TAMANHO_PRECO_MAX, TAMANHO_PRECO_MIN, MSG_PRECO_VALOR_INVALIDO);
+        this.preco = preco;
+    }
 
-	public Integer getQuantidade() {
-		return this.quantidade;
-	}
+    public String getCodigoBarra() {
+        return this.codigoBarra;
+    }
 
-	public void setQuantidade(Integer quantidade) {
-		validarNulo(quantidade, MSG_QUANTIDADE_NULO);
-		validarQuantidadeValorInt(quantidade, TAMANHO_QUANTIDADE_MAX, TAMANHO_QUANTIDADE_MIN, MSG_QUANTIDADE_VALOR_INVALIDO);
-		this.quantidade = quantidade;
-	}
+    public void setCodigoBarra(String codigoBarra) {
+        validarNulo(codigoBarra, MSG_CODIGO_BARRA_NULO);
+        validarEspacos(codigoBarra, MSG_CODIGO_BARRA_BRANCO);
+        validarQuantidadeCaracteresString(codigoBarra, TAMANHO_CODIGO_BARRA_MAX, TAMANHO_CODIGO_BARRA_MIN, MSG_CODIGO_BARRA_QTDE_CARACTERES);
+        validarApenasAlfanumericos(codigoBarra, MSG_CODIGO_BARRA_CARACTERES_INVALIDO);
+        this.codigoBarra = codigoBarra;
+    }
 
-	public String getDescricao() {
-		return this.descricao;
-	}
+    public Integer getQuantidade() {
+        return this.quantidade;
+    }
 
-	public void setDescricao(String descricao) {
-		validarNulo(descricao, MSG_DESCRICAO_NULO);
-		validarEspacos(descricao, MSG_DESCRICAO_BRANCO);
-		validarQuantidadeCaracteresString(descricao, TAMANHO_DESCRICAO_MAX, TAMANHO_DESCRICAO_MIN, MSG_DESCRICAO_QTDE_CARACTERES);
-		validarTexto(descricao, MSG_DESCRICAO_CARACTERES_INVALIDO);
-		this.descricao = descricao;
-	}
+    public void setQuantidade(Integer quantidade) {
+        validarNulo(quantidade, MSG_QUANTIDADE_NULO);
+        validarQuantidadeValorInt(quantidade, TAMANHO_QUANTIDADE_MAX, TAMANHO_QUANTIDADE_MIN, MSG_QUANTIDADE_VALOR_INVALIDO);
+        this.quantidade = quantidade;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(codigoBarra);
-	}
+    public String getDescricao() {
+        return this.descricao;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Produto other = (Produto) obj;
-		return Objects.equals(codigoBarra, other.codigoBarra);
-	}
+    public void setDescricao(String descricao) {
+        validarNulo(descricao, MSG_DESCRICAO_NULO);
+        validarEspacos(descricao, MSG_DESCRICAO_BRANCO);
+        validarQuantidadeCaracteresString(descricao, TAMANHO_DESCRICAO_MAX, TAMANHO_DESCRICAO_MIN, MSG_DESCRICAO_QTDE_CARACTERES);
+        validarTexto(descricao, MSG_DESCRICAO_CARACTERES_INVALIDO);
+        this.descricao = descricao;
+    }
 
-	@Override
-	public String toString() {
-		return new StringBuilder()
-				.append("Produto [preco=").append(preco)
-				.append(", codigoBarra=").append(codigoBarra)
-				.append(", quantidade=").append(quantidade)
-				.append(", descricao=").append(descricao)
-				.append("]")
-				.toString();
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigoBarra);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Produto other = (Produto) obj;
+        return Objects.equals(codigoBarra, other.codigoBarra);
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append("Produto [preco=").append(preco)
+                .append(", codigoBarra=").append(codigoBarra)
+                .append(", quantidade=").append(quantidade)
+                .append(", descricao=").append(descricao)
+                .append("]")
+                .toString();
+    }
 
 }

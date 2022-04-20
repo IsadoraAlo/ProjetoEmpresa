@@ -23,80 +23,80 @@ import java.util.Objects;
 
 public class Municipio {
 
-	private String nome;
-	
-	private String codigoIbge;
-	
-	private UF uf;	
+    private String nome;
 
-	public Municipio(String codigoIbge) {
-		setCodigoIbge(codigoIbge);
-	}
-	
-	public Municipio(String codigoIbge, String nome, UF uf) {
-		setCodigoIbge(codigoIbge);
-		setUf(uf);
-		setNome(nome);		
-	}
-	
-	public String getNome() {
-		return nome;
-	}
+    private String codigoIbge;
 
-	public void setNome(String nome) {
-		validarNulo(nome, MSG_NOME_NULO);
-		validarEspacos(nome, MSG_NOME_BRANCO);
-		validarQuantidadeCaracteresString(nome, TAMANHO_NOME_MAX, TAMANHO_NOME_MIN, MSG_NOME_QTDE_CARACTERES);
-		validarTexto(nome, MSG_NOME_CARACTERES_INVALIDO);
-		this.nome = nome;
-	}
+    private UF uf;
 
-	public String getCodigoIbge() {
-		return codigoIbge;
-	}
+    public Municipio(String codigoIbge) {
+        setCodigoIbge(codigoIbge);
+    }
 
-	public void setCodigoIbge(String codigoIbge) {
-		validarNulo(codigoIbge, MSG_COD_IBGE_NULO);
-		validarEspacos(codigoIbge, MSG_COD_IBGE_BRANCO);
-		validarQuantidadeCaracteresString(codigoIbge, TAMANHO_COD_IBGE_MAX, TAMANHO_COD_IBGE_MIN, MSG_COD_IBGE_QTDE_CARACTERES);
-		validarApenasNumericos(codigoIbge, MSG_COD_IBGE_CARACTERES_INVALIDO);
-		this.codigoIbge = codigoIbge;
-	}
-	
-	public UF getUf() {
-		return this.uf;
-	}
+    public Municipio(String codigoIbge, String nome, UF uf) {
+        setCodigoIbge(codigoIbge);
+        setUf(uf);
+        setNome(nome);
+    }
 
-	public void setUf(UF uf) {
-		validarNulo(uf, MSG_UF_NULO);
-		this.uf = uf;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(codigoIbge);
-	}
+    public void setNome(String nome) {
+        validarNulo(nome, MSG_NOME_NULO);
+        validarEspacos(nome, MSG_NOME_BRANCO);
+        validarQuantidadeCaracteresString(nome, TAMANHO_NOME_MAX, TAMANHO_NOME_MIN, MSG_NOME_QTDE_CARACTERES);
+        validarTexto(nome, MSG_NOME_CARACTERES_INVALIDO);
+        this.nome = nome;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Municipio other = (Municipio) obj;
-		return Objects.equals(codigoIbge, other.codigoIbge);
-	}
+    public String getCodigoIbge() {
+        return codigoIbge;
+    }
 
-	@Override
-	public String toString() {
-		return new StringBuilder()
-				.append("Municipio [nome=").append(nome)
-				.append(", codigoIbge=").append(codigoIbge)
-				.append(", uf=").append(uf)
-				.append("]")
-				.toString();	
-	}
+    public void setCodigoIbge(String codigoIbge) {
+        validarNulo(codigoIbge, MSG_COD_IBGE_NULO);
+        validarEspacos(codigoIbge, MSG_COD_IBGE_BRANCO);
+        validarQuantidadeCaracteresString(codigoIbge, TAMANHO_COD_IBGE_MAX, TAMANHO_COD_IBGE_MIN, MSG_COD_IBGE_QTDE_CARACTERES);
+        validarApenasNumericos(codigoIbge, MSG_COD_IBGE_CARACTERES_INVALIDO);
+        this.codigoIbge = codigoIbge;
+    }
+
+    public UF getUf() {
+        return this.uf;
+    }
+
+    public void setUf(UF uf) {
+        validarNulo(uf, MSG_UF_NULO);
+        this.uf = uf;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigoIbge);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Municipio other = (Municipio) obj;
+        return Objects.equals(codigoIbge, other.codigoIbge);
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append("Municipio [nome=").append(nome)
+                .append(", codigoIbge=").append(codigoIbge)
+                .append(", uf=").append(uf)
+                .append("]")
+                .toString();
+    }
 
 }

@@ -24,7 +24,7 @@ import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UFTest {
-    
+
     UF uf;
 
     UF ufTestes;
@@ -52,124 +52,124 @@ public class UFTest {
     }
 
     // CÓDIGO IBGE
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void teste_01_nao_deve_aceitar_codigo_ibge_nulo() {
         this.uf.setCodigoIbge(null);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_02_nao_deve_aceitar_codigo_ibge_em_branco() {
         this.uf.setCodigoIbge(ESPACO_BRANCO);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_03_nao_deve_ultrapassar_qntd_caractere_max_codigo_ibge() {
         this.uf.setCodigoIbge(STRING_NUMERICA_20);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_04_nao_deve_limiar_qntd_caractere_min_codigo_ibge() {
         this.uf.setCodigoIbge(STRING_NUMERICA_1);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_05_nao_deve_aceitar_caracteres_invalidos_codigo_ibge() {
         this.uf.setCodigoIbge(STRING_CARACTERES_ESPECIAIS_2);
     }
-    
+
     @Test
     public void teste_06_deve_validar_codigo_ibge_com_sucesso() {
         assertEquals(CODIGO_IBGE_DEFAULT, this.uf.getCodigoIbge());
     }
-    
+
     // NOME
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void teste_07_nao_deve_aceitar_nome_nulo() {
         this.uf.setNome(null);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_08_nao_deve_aceitar_nome_em_branco() {
         this.uf.setNome(ESPACO_BRANCO);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_09_nao_deve_ultrapassar_qntd_caractere_max_nome() {
         this.uf.setNome(STRING_ALFABETICA_75);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_10_nao_deve_limiar_qntd_caractere_min_nome() {
         this.uf.setNome(STRING_ALFABETICA_1);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_11_nao_deve_aceitar_caracteres_invalidos_nome() {
         this.uf.setNome(STRING_NUMERICA_1);
     }
-    
+
     @Test
     public void teste_12_deve_validar_nome_com_sucesso() {
         assertEquals(NOME_DEFAULT, this.uf.getNome());
     }
-    
+
     // SIGLA
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void teste_13_nao_deve_aceitar_sigla_nulo() {
         this.uf.setSigla(null);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_14_nao_deve_aceitar_sigla_em_branco() {
         this.uf.setSigla(ESPACO_BRANCO);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_15_nao_deve_ultrapassar_qntd_caractere_max_sigla() {
         this.uf.setSigla(STRING_ALFABETICA_75);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_16_nao_deve_limiar_qntd_caractere_min_sigla() {
         this.uf.setSigla(STRING_ALFABETICA_1);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_17_nao_deve_aceitar_caracteres_invalidos_sigla() {
         this.uf.setSigla("@!");
     }
-    
+
     @Test
     public void teste_18_deve_validar_sigla_com_sucesso() {
         assertEquals(SIGLA_DEFAULT, this.uf.getSigla());
     }
-    
-    //TO STRING
-    
+
+    // TO STRING
+
     @Test
     public void teste_19_deve_validar_to_string() {
         assertTrue(uf.toString().contains(CODIGO_IBGE_DEFAULT));
         assertTrue(uf.toString().contains(NOME_DEFAULT));
         assertTrue(uf.toString().contains(SIGLA_DEFAULT));
     }
-    
+
     // HASH CODE
-    
+
     @Test
     public void teste_20_deve_validar_hash_code_equivalentes() {
         assertEquals(this.uf.hashCode(), this.uf.hashCode());
     }
-    
+
     @Test
     public void teste_21_deve_validar_hash_code_divergentes() {
         assertFalse(this.uf.hashCode() == this.ufTestes.hashCode());
     }
-    
+
     // EQUALS
-    
+
     @Test
     public void teste_22_deve_validar_equals_com_campos_equivalentes() {
         assertTrue(this.uf.equals(this.uf));
@@ -189,5 +189,5 @@ public class UFTest {
     public void teste_25_nao_deve_validar_equals_com_classes_divergentes() {
         assertFalse(this.uf.equals(new Object()));
     }
-    
+
 }
