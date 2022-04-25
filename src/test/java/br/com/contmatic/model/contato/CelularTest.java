@@ -11,6 +11,8 @@ import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstan
 import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.DDI_TESTES;
 import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.NUMERO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.NUMERO_TESTES;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -20,6 +22,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -208,5 +211,17 @@ public class CelularTest {
         Celular c = new Celular(NUMERO_DEFAULT, DDD_DEFAULT, DDI_DEFAULT);
         assertTrue(this.celular.equals(c));
     }
-
+    
+    @Test(timeout = 1000)
+    public void teste_29_deve_validar_string_campo() {
+        assertThat("11",is(celular.getDdd()));
+    }
+    
+    @Test
+    @Ignore("Obrigatório ter um ignore")
+    public void teste_30_deve_ignorar_o_teste() {
+        Celular c = new Celular(NUMERO_DEFAULT, DDD_DEFAULT, DDI_DEFAULT);
+        assertTrue(this.celular.equals(c));
+    }
+    
 }

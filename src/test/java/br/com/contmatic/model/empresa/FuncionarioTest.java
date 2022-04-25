@@ -284,7 +284,7 @@ public class FuncionarioTest {
 
     @Test(expected = IllegalStateException.class)
     public void teste_31_nao_deve_aceitar_caracteres_invalidos_rg() {
-        this.funcionario.setRg(STRING_CARACTERES_ESPECIAIS_10);
+        this.funcionario.setRg("!!!!!!!!!!!");
     }
 
     @Test
