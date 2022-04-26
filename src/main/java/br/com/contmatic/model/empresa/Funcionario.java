@@ -301,9 +301,9 @@ public class Funcionario extends Auditoria {
         return Objects.equals(cpf, other.cpf) && Objects.equals(empresa, other.empresa);
     }
 
-    //TODO AUDITORIA
     @Override
     public String toString() {
+        super.toString();
         return new StringBuilder()
                 .append("Funcionario [nomeCompleto=").append(nomeCompleto)
                 .append(", nomeSocial=").append(nomeSocial)
@@ -320,6 +320,7 @@ public class Funcionario extends Auditoria {
                 .append(", endereco=").append(endereco)
                 .append("]")
                 .toString();
+                
     }
 
 }

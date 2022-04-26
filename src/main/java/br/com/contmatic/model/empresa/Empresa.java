@@ -180,9 +180,9 @@ public class Empresa extends Auditoria {
         return Objects.equals(cnpj, other.cnpj);
     }
 
-    //TODO AUDITORIA
     @Override
     public String toString() {
+        super.toString();
         return new StringBuilder()
                 .append("Empresa [razaoSocial=").append(razaoSocial)
                 .append(", nomeFantasia=").append(nomeFantasia)

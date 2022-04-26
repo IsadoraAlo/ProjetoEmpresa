@@ -564,44 +564,55 @@ public class FuncionarioTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_79_nao_deve_aceitar_cpf_invalido() {
+    public void teste_79_nao_deve_aceitar_cpf_segundo_dig_invalido() {
         this.funcionario.setCpf("92929499011");
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void teste_80_nao_deve_aceitar_cpf_primeiro_dig_invalido() {
+        this.funcionario.setCpf("74070649054");
+    }
+    
+    @Test(expected = IllegalStateException.class)
+    public void teste_81_nao_deve_validar_cpf_com_resto_0() {
+        this.funcionario.setCpf("52704603000");
+    }
+    
     @Test
-    public void teste_80_deve_validar_cpf_com_sucesso() {
-        assertEquals(CPF_DEFAULT, this.funcionario.getCpf());
+    public void teste_82_deve_validar_cpf_com_sucesso() {
+        this.funcionario.setCpf("70582518008");
+        assertEquals("70582518008", this.funcionario.getCpf());
     }
 
     // USUÁRIO CRIAÇÃO
 
     @Test(expected = IllegalArgumentException.class)
-    public void teste_81_nao_deve_aceitar_usuario_criacao_nulo() {
+    public void teste_83_nao_deve_aceitar_usuario_criacao_nulo() {
         this.funcionario.setUsuarioCriacao(null);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_82_nao_deve_aceitar_usuario_criacao_em_branco() {
+    public void teste_84_nao_deve_aceitar_usuario_criacao_em_branco() {
         this.funcionario.setUsuarioCriacao(ESPACO_BRANCO);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_83_nao_deve_ultrapassar_qntd_caractere_max_usuario_criacao() {
+    public void teste_85_nao_deve_ultrapassar_qntd_caractere_max_usuario_criacao() {
         this.funcionario.setUsuarioCriacao(STRING_ALFABETICA_75);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_84_nao_deve_limiar_qntd_caractere_min_usuario_criacao() {
+    public void teste_86_nao_deve_limiar_qntd_caractere_min_usuario_criacao() {
         this.funcionario.setUsuarioCriacao(STRING_ALFABETICA_1);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_85_nao_deve_aceitar_caracteres_usuario_criacao() {
+    public void teste_87_nao_deve_aceitar_caracteres_usuario_criacao() {
         this.funcionario.setUsuarioCriacao(STRING_CARACTERES_ESPECIAIS_10);
     }
 
     @Test
-    public void teste_86_deve_validar_usuario_criacao_com_sucesso() {
+    public void teste_88_deve_validar_usuario_criacao_com_sucesso() {
         this.funcionario.setUsuarioCriacao(USUARIO_CRIACAO_DEFAULT);
         assertEquals(USUARIO_CRIACAO_DEFAULT, this.funcionario.getUsuarioCriacao());
     }
@@ -609,32 +620,32 @@ public class FuncionarioTest {
     // USUÁRIO ALTERAÇÃO
 
     @Test(expected = IllegalArgumentException.class)
-    public void teste_87_nao_deve_aceitar_usuario_alteracao_nulo() {
+    public void teste_89_nao_deve_aceitar_usuario_alteracao_nulo() {
         this.funcionario.setUsuarioAlteracao(null);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_88_nao_deve_aceitar_usuario_alteracao_em_branco() {
+    public void teste_90_nao_deve_aceitar_usuario_alteracao_em_branco() {
         this.funcionario.setUsuarioAlteracao(ESPACO_BRANCO);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_89_nao_deve_ultrapassar_qntd_caractere_max_usuario_alteracao() {
+    public void teste_91_nao_deve_ultrapassar_qntd_caractere_max_usuario_alteracao() {
         this.funcionario.setUsuarioAlteracao(STRING_ALFABETICA_75);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_90_nao_deve_limiar_qntd_caractere_min_usuario_alteracao() {
+    public void teste_92_nao_deve_limiar_qntd_caractere_min_usuario_alteracao() {
         this.funcionario.setUsuarioAlteracao(STRING_ALFABETICA_1);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_91_nao_deve_aceitar_caracteres_usuario_alteracao() {
+    public void teste_93_nao_deve_aceitar_caracteres_usuario_alteracao() {
         this.funcionario.setUsuarioAlteracao(STRING_CARACTERES_ESPECIAIS_10);
     }
 
     @Test
-    public void teste_92_deve_validar_usuario_alteracao_com_sucesso() {
+    public void teste_94_deve_validar_usuario_alteracao_com_sucesso() {
         this.funcionario.setUsuarioAlteracao(USUARIO_ALTERACAO_DEFAULT);
         assertEquals(USUARIO_ALTERACAO_DEFAULT, this.funcionario.getUsuarioAlteracao());
     }
@@ -642,32 +653,32 @@ public class FuncionarioTest {
     // IP CRIAÇÃO
 
     @Test(expected = IllegalArgumentException.class)
-    public void teste_93_nao_deve_aceitar_ip_criacao_nulo() {
+    public void teste_95_nao_deve_aceitar_ip_criacao_nulo() {
         this.funcionario.setIpCriacao(null);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_94_nao_deve_aceitar_ip_criacao_em_branco() {
+    public void teste_96_nao_deve_aceitar_ip_criacao_em_branco() {
         this.funcionario.setIpCriacao(ESPACO_BRANCO);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_95_nao_deve_ultrapassar_qntd_caractere_max_ip_criacao() {
+    public void teste_97_nao_deve_ultrapassar_qntd_caractere_max_ip_criacao() {
         this.funcionario.setIpCriacao(STRING_ALFABETICA_75);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_96_nao_deve_limiar_qntd_caractere_min_ip_criacao() {
+    public void teste_98_nao_deve_limiar_qntd_caractere_min_ip_criacao() {
         this.funcionario.setIpCriacao(STRING_ALFABETICA_1);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_97_nao_deve_aceitar_caracteres_ip_criacao() {
+    public void teste_99_nao_deve_aceitar_caracteres_ip_criacao() {
         this.funcionario.setIpCriacao(STRING_CARACTERES_ESPECIAIS_10);
     }
 
     @Test
-    public void teste_98_deve_validar_ip_criacao_com_sucesso() {
+    public void teste_100_deve_validar_ip_criacao_com_sucesso() {
         this.funcionario.setIpCriacao(IP_CRIACAO_DEFAULT);
         assertEquals(IP_CRIACAO_DEFAULT, this.funcionario.getIpCriacao());
     }
@@ -675,32 +686,32 @@ public class FuncionarioTest {
     // IP ALTERAÇÃO
 
     @Test(expected = IllegalArgumentException.class)
-    public void teste_99_nao_deve_aceitar_ip_alteracao_nulo() {
+    public void teste_101_nao_deve_aceitar_ip_alteracao_nulo() {
         this.funcionario.setIpAlteracao(null);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_100_nao_deve_aceitar_ip_alteracao_em_branco() {
+    public void teste_102_nao_deve_aceitar_ip_alteracao_em_branco() {
         this.funcionario.setIpAlteracao(ESPACO_BRANCO);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_101_nao_deve_ultrapassar_qntd_caractere_max_ip_alteracao() {
+    public void teste_103_nao_deve_ultrapassar_qntd_caractere_max_ip_alteracao() {
         this.funcionario.setIpAlteracao(STRING_ALFABETICA_75);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_102_nao_deve_limiar_qntd_caractere_min_ip_alteracao() {
+    public void teste_104_nao_deve_limiar_qntd_caractere_min_ip_alteracao() {
         this.funcionario.setIpAlteracao(STRING_ALFABETICA_1);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_103_nao_deve_aceitar_caracteres_ip_alteracao() {
+    public void teste_105_nao_deve_aceitar_caracteres_ip_alteracao() {
         this.funcionario.setIpAlteracao(STRING_CARACTERES_ESPECIAIS_10);
     }
 
     @Test
-    public void teste_104_deve_validar_ip_alteracao_com_sucesso() {
+    public void teste_106_deve_validar_ip_alteracao_com_sucesso() {
         this.funcionario.setIpAlteracao(IP_ALTERACAO_DEFAULT);
         assertEquals(IP_ALTERACAO_DEFAULT, this.funcionario.getIpAlteracao());
     }
@@ -708,22 +719,22 @@ public class FuncionarioTest {
     // DATA CRIAÇÃO
 
     @Test(expected = IllegalArgumentException.class)
-    public void teste_105_nao_deve_aceitar_data_criacao_nulo() {
+    public void teste_107_nao_deve_aceitar_data_criacao_nulo() {
         this.funcionario.setDataCriacao(null);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_106_nao_deve_aceitar_data_criacao_muito_futura() {
+    public void teste_108_nao_deve_aceitar_data_criacao_muito_futura() {
         this.funcionario.setDataCriacao(DATA_300_ANOS_FUTURO);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_107_nao_deve_aceitar_data_criacao_ultrapassada() {
+    public void teste_109_nao_deve_aceitar_data_criacao_ultrapassada() {
         this.funcionario.setDataCriacao(DATA_100_ANOS_PASSADO);
     }
 
     @Test
-    public void teste_108_deve_validar_data_criacao_com_sucesso() {
+    public void teste_110_deve_validar_data_criacao_com_sucesso() {
         this.funcionario.setDataCriacao(DATA_ATUAL);
         assertEquals(DATA_ATUAL, this.funcionario.getDataCriacao());
     }
@@ -731,31 +742,31 @@ public class FuncionarioTest {
     // DATA ALTERAÇÃO
 
     @Test(expected = IllegalArgumentException.class)
-    public void teste_109_nao_deve_aceitar_data_alteracao_nulo() {
+    public void teste_111_nao_deve_aceitar_data_alteracao_nulo() {
         this.funcionario.setDataCriacao(DATA_INICIO_ANO);
         this.funcionario.setDataAlteracao(null);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_110_nao_deve_aceitar_data_alteracao_muito_futura() {
+    public void teste_112_nao_deve_aceitar_data_alteracao_muito_futura() {
         this.funcionario.setDataCriacao(DATA_INICIO_ANO);
         this.funcionario.setDataAlteracao(DATA_300_ANOS_FUTURO);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_111_nao_deve_aceitar_data_alteracao_ultrapassada() {
+    public void teste_113_nao_deve_aceitar_data_alteracao_ultrapassada() {
         this.funcionario.setDataCriacao(DATA_INICIO_ANO);
         this.funcionario.setDataAlteracao(DATA_100_ANOS_PASSADO);
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_112_nao_deve_validar_data_alteracao_menor_data_criacao() {
+    public void teste_114_nao_deve_validar_data_alteracao_menor_data_criacao() {
         this.funcionario.setDataCriacao(DATA_ATUAL);
         this.funcionario.setDataAlteracao(DATA_INICIO_ANO);
     }
 
     @Test
-    public void teste_113_deve_validar_data_alteracao_com_sucesso() {
+    public void teste_115_deve_validar_data_alteracao_com_sucesso() {
         this.funcionario.setDataCriacao(DATA_INICIO_ANO);
         this.funcionario.setDataAlteracao(DATA_ATUAL);
         assertEquals(DATA_ATUAL, this.funcionario.getDataAlteracao());
@@ -764,7 +775,7 @@ public class FuncionarioTest {
     // TO STRING
 
     @Test
-    public void teste_114_deve_validar_to_string() {
+    public void teste_116_deve_validar_to_string() {
         this.funcionario.setEndereco(this.endereco);
         assertTrue(funcionario.toString().contains(CPF_DEFAULT));
         assertTrue(funcionario.toString().contains(NOME_COMPLETO_DEFAULT));
@@ -783,51 +794,51 @@ public class FuncionarioTest {
     // HASH CODE
 
     @Test
-    public void teste_115_deve_validar_hash_code_equivalentes() {
+    public void teste_117_deve_validar_hash_code_equivalentes() {
         assertEquals(this.funcionario.hashCode(), this.funcionario.hashCode());
     }
 
     @Test
-    public void teste_116_deve_validar_hash_code_divergentes() {
+    public void teste_118_deve_validar_hash_code_divergentes() {
         assertFalse(this.funcionario.hashCode() == this.funcionarioTestes.hashCode());
     }
 
     // EQUALS
 
     @Test
-    public void teste_117_deve_validar_equals_com_campos_equivalentes() {
+    public void teste_119_deve_validar_equals_com_campos_equivalentes() {
         assertTrue(this.funcionario.equals(this.funcionario));
     }
 
     @Test
-    public void teste_118_nao_deve_validar_equals_com_campos_divergentes() {
+    public void teste_120_nao_deve_validar_equals_com_campos_divergentes() {
         assertFalse(this.funcionario.equals(this.funcionarioTestes));
     }
 
     @Test
-    public void teste_119_nao_deve_validar_equals_nulo() {
+    public void teste_121_nao_deve_validar_equals_nulo() {
         assertFalse(this.funcionario.equals(null));
     }
 
     @Test
-    public void teste_120_nao_deve_validar_equals_com_classes_divergentes() {
+    public void teste_122_nao_deve_validar_equals_com_classes_divergentes() {
         assertFalse(this.funcionario.equals(new Object()));
     }
     
     @Test
-    public void teste_121_nao_deve_validar_equals_objetos_divergentes_cpf_divergente() {
+    public void teste_123_nao_deve_validar_equals_objetos_divergentes_cpf_divergente() {
         Funcionario f = new Funcionario("73128837023", empresa);
         assertFalse(this.funcionario.equals(f));
     }
 
     @Test
-    public void teste_122_nao_deve_validar_equals_objetos_divergentes_empresa_divergente() {
+    public void teste_124_nao_deve_validar_equals_objetos_divergentes_empresa_divergente() {
         Funcionario f = new Funcionario(CPF_DEFAULT, new Empresa("46123716000187"));
         assertFalse(this.funcionario.equals(f));
     }
     
     @Test
-    public void teste_123_deve_validar_equals_objetos_divergentes_campos_iguais() {
+    public void teste_125_deve_validar_equals_objetos_divergentes_campos_iguais() {
         Funcionario f = new Funcionario(CPF_DEFAULT, empresa);
         assertTrue(this.funcionario.equals(f));
     }

@@ -115,16 +115,16 @@ public class Produto extends Auditoria {
         return Objects.equals(codigoBarra, other.codigoBarra);
     }
 
-    //TODO AUDITORIA
     @Override
     public String toString() {
+        super.toString();
         return new StringBuilder()
                 .append("Produto [preco=").append(preco)
                 .append(", codigoBarra=").append(codigoBarra)
                 .append(", quantidade=").append(quantidade)
                 .append(", descricao=").append(descricao)
                 .append("]")
-                .toString();
+                .toString();                
     }
 
 }

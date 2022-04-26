@@ -22,7 +22,7 @@ public final class UtilCpf {
     private static void validarDigito(String cpf) {
         int dig10 = calculoPrimeiroDigito(cpf);
         int dig11 = calculoSegundoDigito(cpf);
-        if ((dig10 != cpf.charAt(POSICAO_DIGITO_09)) && (dig11 != cpf.charAt(POSICAO_DIGITO_10))) {
+        if ((dig10 != cpf.charAt(POSICAO_DIGITO_09)) || (dig11 != cpf.charAt(POSICAO_DIGITO_10))) {
             throw new IllegalStateException("CPF inválido!");
         }
     }
