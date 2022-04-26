@@ -26,8 +26,8 @@ public class Contato {
 
     private List<Celular> celulares;
 
-    public Contato(List<Email> emails) {
-        setEmails(emails);
+    public Contato(List<Celular> celulares) {
+        setCelulares(celulares);
     }
 
     public Contato(List<Email> emails, List<Telefone> telefones, List<Celular> celulares) {
@@ -68,7 +68,7 @@ public class Contato {
 
     @Override
     public int hashCode() {
-        return Objects.hash(emails);
+        return Objects.hash(celulares);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Contato {
         if (getClass() != obj.getClass())
             return false;
         Contato other = (Contato) obj;
-        return Objects.equals(emails, other.emails);
+        return Objects.equals(celulares, other.celulares);
     }
 
     @Override

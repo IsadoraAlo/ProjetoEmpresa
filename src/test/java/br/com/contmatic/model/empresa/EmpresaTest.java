@@ -12,8 +12,9 @@ import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.ES
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.STRING_ALFABETICA_1;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.STRING_ALFABETICA_75;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.STRING_CARACTERES_ESPECIAIS_10;
-import static br.com.contmatic.model.utils.constantes.contato.EmailTestConstantes.ENDERECO_DEFAULT;
-import static br.com.contmatic.model.utils.constantes.contato.EmailTestConstantes.TIPO_DEFAULT;
+import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.DDD_DEFAULT;
+import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.DDI_DEFAULT;
+import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.NUMERO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaTestConstantes.CNPJ_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaTestConstantes.CNPJ_TESTES;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaTestConstantes.NOME_FANTASIA_DEFAULT;
@@ -37,8 +38,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import br.com.contmatic.model.contato.Celular;
 import br.com.contmatic.model.contato.Contato;
-import br.com.contmatic.model.contato.Email;
 import br.com.contmatic.model.endereco.Endereco;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -64,10 +65,10 @@ public class EmpresaTest {
     @Before
     public void iniciar_testes() {
 
-        List<Email> emails = new ArrayList<Email>();
-        emails.add(new Email(ENDERECO_DEFAULT, TIPO_DEFAULT));
+        List<Celular> celulares = new ArrayList<Celular>();
+        celulares.add(new Celular(NUMERO_DEFAULT, DDD_DEFAULT, DDI_DEFAULT));
 
-        this.contato = new Contato(emails);
+        this.contato = new Contato(celulares);
 
         this.enderecos = new ArrayList<Endereco>();
         this.enderecos.add(new Endereco(CEP_DEFAULT, NUMERO_ENDERECO_DEFAULT));
@@ -149,6 +150,11 @@ public class EmpresaTest {
     @Test(expected = IllegalStateException.class)
     public void teste_11_nao_deve_aceitar_cnpj_invalido() {
         this.empresa.setCnpj("18811495000100");
+    }
+    
+    @Test(expected = IllegalStateException.class)
+    public void teste_11_nao_deve_aceitar_cnpj_maior_que_permitido() {
+        this.empresa.setCnpj("188114950001000");
     }
 
     @Test

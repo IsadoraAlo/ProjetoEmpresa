@@ -39,13 +39,13 @@ public final class Util {
         }
     }
 
-    public static void validarQuantidadeValorBigDecimal(BigDecimal campo, BigDecimal valorMax, BigDecimal valorMin, String mensagem) {
+    public static void limitarQuantidadeNumericaMaximaMinima(BigDecimal campo, BigDecimal valorMax, BigDecimal valorMin, String mensagem) {
         if (campo.compareTo(valorMax) >= 0 || campo.compareTo(valorMin) <= 0 ) {
             throw new IllegalStateException(mensagem);
         }
     }
 
-    public static void validarQuantidadeValorInt(Integer campo, Integer valorMax, Integer valorMin, String mensagem) {
+    public static void limitarQuantidadeNumericaMaximaMinima(Integer campo, Integer valorMax, Integer valorMin, String mensagem) {
         if (campo > valorMax || campo < valorMin) {
             throw new IllegalStateException(mensagem);
         }

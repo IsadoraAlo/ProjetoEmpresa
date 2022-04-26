@@ -15,6 +15,20 @@ public final class EnderecoConstantes {
     public static final Integer TAMANHO_BAIRRO_MAX = 70;
 
     public static final Integer TAMANHO_BAIRRO_MIN = 10;
+    
+    // TIPO DE LOGRADOURO
+
+    public static final String MSG_TIPO_LOGRADOURO_NULO = "Tipo de Logradouro é obrigatório!";
+
+    public static final String MSG_TIPO_LOGRADOURO_BRANCO = "Tipo de Logradouro não pode estar em branco.";
+
+    public static final String MSG_TIPO_LOGRADOURO_QTDE_CARACTERES = "A quantidade máxima de caracteres foi excedida em Tipo de Logradouro.";
+
+    public static final String MSG_TIPO_LOGRADOURO_CARACTERES_INVALIDO = "Tipo de Logradouro possuí caracteres inválidos.";
+
+    public static final Integer TAMANHO_TIPO_LOGRADOURO_MAX = 15;
+
+    public static final Integer TAMANHO_TIPO_LOGRADOURO_MIN = 5;
 
     // LOGRADOURO
 

@@ -24,8 +24,7 @@ import static br.com.contmatic.model.utils.validacao.Util.validarApenasAlfanumer
 import static br.com.contmatic.model.utils.validacao.Util.validarEspacos;
 import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCaracteresString;
-import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeValorBigDecimal;
-import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeValorInt;
+import static br.com.contmatic.model.utils.validacao.Util.limitarQuantidadeNumericaMaximaMinima;
 import static br.com.contmatic.model.utils.validacao.Util.validarTexto;
 
 import java.math.BigDecimal;
@@ -61,7 +60,7 @@ public class Produto extends Auditoria {
 
     public void setPreco(BigDecimal preco) {
         validarNulo(preco, MSG_PRECO_NULO);
-        validarQuantidadeValorBigDecimal(preco, TAMANHO_PRECO_MAX, TAMANHO_PRECO_MIN, MSG_PRECO_VALOR_INVALIDO);
+        limitarQuantidadeNumericaMaximaMinima(preco, TAMANHO_PRECO_MAX, TAMANHO_PRECO_MIN, MSG_PRECO_VALOR_INVALIDO);
         this.preco = preco;
     }
 
@@ -83,7 +82,7 @@ public class Produto extends Auditoria {
 
     public void setQuantidade(Integer quantidade) {
         validarNulo(quantidade, MSG_QUANTIDADE_NULO);
-        validarQuantidadeValorInt(quantidade, TAMANHO_QUANTIDADE_MAX, TAMANHO_QUANTIDADE_MIN, MSG_QUANTIDADE_VALOR_INVALIDO);
+        limitarQuantidadeNumericaMaximaMinima(quantidade, TAMANHO_QUANTIDADE_MAX, TAMANHO_QUANTIDADE_MIN, MSG_QUANTIDADE_VALOR_INVALIDO);
         this.quantidade = quantidade;
     }
 
@@ -116,6 +115,7 @@ public class Produto extends Auditoria {
         return Objects.equals(codigoBarra, other.codigoBarra);
     }
 
+    //TODO AUDITORIA
     @Override
     public String toString() {
         return new StringBuilder()

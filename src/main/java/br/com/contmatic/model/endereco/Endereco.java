@@ -12,12 +12,17 @@ import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstante
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_COMPLEMENTO_CARACTERES_INVALIDO;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_COMPLEMENTO_NULO;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_COMPLEMENTO_QTDE_CARACTERES;
+import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_LOGRADOURO_BRANCO;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_LOGRADOURO_CARACTERES_INVALIDO;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_LOGRADOURO_NULO;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_LOGRADOURO_QTDE_CARACTERES;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_MUNICIPIO_NULO;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_NUMERO_NULO;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_NUMERO_QTDE_CARACTERES;
+import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_TIPO_LOGRADOURO_BRANCO;
+import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_TIPO_LOGRADOURO_CARACTERES_INVALIDO;
+import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_TIPO_LOGRADOURO_NULO;
+import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.MSG_TIPO_LOGRADOURO_QTDE_CARACTERES;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.TAMANHO_BAIRRO_MAX;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.TAMANHO_BAIRRO_MIN;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.TAMANHO_CEP_MAX;
@@ -28,11 +33,13 @@ import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstante
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.TAMANHO_LOGRADOURO_MIN;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.TAMANHO_NUMERO_MAX;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.TAMANHO_NUMERO_MIN;
+import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.TAMANHO_TIPO_LOGRADOURO_MAX;
+import static br.com.contmatic.model.utils.constantes.endereco.EnderecoConstantes.TAMANHO_TIPO_LOGRADOURO_MIN;
+import static br.com.contmatic.model.utils.validacao.Util.limitarQuantidadeNumericaMaximaMinima;
 import static br.com.contmatic.model.utils.validacao.Util.validarApenasNumericos;
 import static br.com.contmatic.model.utils.validacao.Util.validarEspacos;
 import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCaracteresString;
-import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeValorInt;
 import static br.com.contmatic.model.utils.validacao.Util.validarTexto;
 
 import java.util.Objects;
@@ -45,6 +52,8 @@ public class Endereco {
 
     private Municipio municipio;
 
+    private String tipoLogradouro;
+    
     private String logradouro;
 
     private Integer numero;
@@ -56,11 +65,12 @@ public class Endereco {
         setNumero(numero);
     }
 
-    public Endereco(String cep, Integer numero, String bairro, Municipio municipio, String logradouro, String complemento) {
+    public Endereco(String cep, Integer numero, String bairro, Municipio municipio, String tipoLogradouro, String logradouro, String complemento) {
         setCep(cep);
         setNumero(numero);
         setBairro(bairro);
         setMunicipio(municipio);
+        setTipoLogradouro(tipoLogradouro);
         setLogradouro(logradouro);
         setComplemento(complemento);
     }
@@ -83,7 +93,7 @@ public class Endereco {
 
     public void setNumero(Integer numero) {
         validarNulo(numero, MSG_NUMERO_NULO);
-        validarQuantidadeValorInt(numero, TAMANHO_NUMERO_MAX, TAMANHO_NUMERO_MIN, MSG_NUMERO_QTDE_CARACTERES);
+        limitarQuantidadeNumericaMaximaMinima(numero, TAMANHO_NUMERO_MAX, TAMANHO_NUMERO_MIN, MSG_NUMERO_QTDE_CARACTERES);
         this.numero = numero;
     }
 
@@ -108,13 +118,25 @@ public class Endereco {
         this.municipio = municipio;
     }
 
+    public String getTipoLogradouro() {
+        return tipoLogradouro;
+    }
+
+    public void setTipoLogradouro(String tipoLogradouro) {
+        validarNulo(tipoLogradouro, MSG_TIPO_LOGRADOURO_NULO);
+        validarEspacos(tipoLogradouro, MSG_TIPO_LOGRADOURO_BRANCO);
+        validarQuantidadeCaracteresString(tipoLogradouro, TAMANHO_TIPO_LOGRADOURO_MAX, TAMANHO_TIPO_LOGRADOURO_MIN, MSG_TIPO_LOGRADOURO_QTDE_CARACTERES);
+        validarTexto(tipoLogradouro, MSG_TIPO_LOGRADOURO_CARACTERES_INVALIDO);
+        this.tipoLogradouro = tipoLogradouro;
+    }
+
     public String getLogradouro() {
         return this.logradouro;
     }
 
     public void setLogradouro(String logradouro) {
         validarNulo(logradouro, MSG_LOGRADOURO_NULO);
-        validarEspacos(logradouro, MSG_BAIRRO_BRANCO);
+        validarEspacos(logradouro, MSG_LOGRADOURO_BRANCO);
         validarQuantidadeCaracteresString(logradouro, TAMANHO_LOGRADOURO_MAX, TAMANHO_LOGRADOURO_MIN, MSG_LOGRADOURO_QTDE_CARACTERES);
         validarTexto(logradouro, MSG_LOGRADOURO_CARACTERES_INVALIDO);
         this.logradouro = logradouro;
@@ -156,6 +178,7 @@ public class Endereco {
                 .append(", bairro=").append(bairro)
                 .append(", municipio=").append(municipio)
                 .append(", logradouro=").append(logradouro)
+                .append(", tipoLogradouro=").append(tipoLogradouro)
                 .append(", numero=").append(numero)
                 .append(", complemento=").append(complemento)
                 .append("]")

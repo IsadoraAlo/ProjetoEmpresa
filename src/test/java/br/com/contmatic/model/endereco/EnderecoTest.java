@@ -15,6 +15,7 @@ import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConst
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConstantes.CODIGO_IBGE_UF_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConstantes.COMPLEMENTO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConstantes.LOGRADOURO_DEFAULT;
+import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConstantes.TIPO_LOGRADOURO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConstantes.NOME_MUNICIPIO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConstantes.NOME_UF_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConstantes.NUMERO_DEFAULT;
@@ -50,7 +51,7 @@ public class EnderecoTest {
     public void iniciar_testes() {
         UF uf = new UF(CODIGO_IBGE_UF_DEFAULT, NOME_UF_DEFAULT, SIGLA_UF_DEFAULT);
         this.municipio = new Municipio(CODIGO_IBGE_MUNICIPIO_DEFAULT, NOME_MUNICIPIO_DEFAULT, uf);
-        this.endereco = new Endereco(CEP_DEFAULT, NUMERO_DEFAULT, BAIRRO_DEFAULT, municipio, LOGRADOURO_DEFAULT, COMPLEMENTO_DEFAULT);
+        this.endereco = new Endereco(CEP_DEFAULT, NUMERO_DEFAULT, BAIRRO_DEFAULT, municipio, TIPO_LOGRADOURO_DEFAULT, LOGRADOURO_DEFAULT, COMPLEMENTO_DEFAULT);
         this.enderecoTestes = new Endereco(CEP_TESTES, NUMERO_TESTES);
     }
 
@@ -171,7 +172,7 @@ public class EnderecoTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_21_nao_deve_aceitar_logradouro_em_branco() {
+    public void teste_20_nao_deve_aceitar_logradouro_em_branco() {
         this.endereco.setLogradouro(ESPACO_BRANCO);
     }
 
@@ -226,11 +227,43 @@ public class EnderecoTest {
     public void teste_30_deve_validar_complemento_com_sucesso() {
         assertEquals(COMPLEMENTO_DEFAULT, this.endereco.getComplemento());
     }
+    
+    // TIPO DE LOGRADOURO
+
+    @Test(expected = IllegalArgumentException.class)
+    public void teste_31_nao_deve_aceitar_tipo_logradouro_nulo() {
+        this.endereco.setTipoLogradouro(null);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void teste_32_nao_deve_aceitar_tipo_logradouro_em_branco() {
+        this.endereco.setTipoLogradouro(ESPACO_BRANCO);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void teste_33_nao_deve_ultrapassar_qntd_caractere_max_tipo_logradouro() {
+        this.endereco.setTipoLogradouro(STRING_ALFABETICA_75);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void teste_34_nao_deve_limiar_qntd_caractere_min_tipo_logradouro() {
+        this.endereco.setTipoLogradouro(STRING_NUMERICA_1);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void teste_35_nao_deve_aceitar_caracteres_invalidos_tipo_logradouro() {
+        this.endereco.setTipoLogradouro(STRING_CARACTERES_ESPECIAIS_10);
+    }
+
+    @Test
+    public void teste_36_deve_validar_tipo_logradouro_com_sucesso() {
+        assertEquals(TIPO_LOGRADOURO_DEFAULT, this.endereco.getTipoLogradouro());
+    }
 
     // TO STRING
 
     @Test
-    public void teste_31_deve_validar_to_string() {
+    public void teste_37_deve_validar_to_string() {
         assertTrue(endereco.toString().contains(CEP_DEFAULT));
         assertTrue(endereco.toString().contains(BAIRRO_DEFAULT));
         assertTrue(endereco.toString().contains(CODIGO_IBGE_MUNICIPIO_DEFAULT));
@@ -246,51 +279,51 @@ public class EnderecoTest {
     // HASH CODE
 
     @Test
-    public void teste_32_deve_validar_hash_code_equivalentes() {
+    public void teste_38_deve_validar_hash_code_equivalentes() {
         assertEquals(this.endereco.hashCode(), this.endereco.hashCode());
     }
 
     @Test
-    public void teste_33_deve_validar_hash_code_divergentes() {
+    public void teste_39_deve_validar_hash_code_divergentes() {
         assertFalse(this.endereco.hashCode() == this.enderecoTestes.hashCode());
     }
 
     // EQUALS
 
     @Test
-    public void teste_34_deve_validar_equals_com_campos_equivalentes() {
+    public void teste_40_deve_validar_equals_com_campos_equivalentes() {
         assertTrue(this.endereco.equals(this.endereco));
     }
 
     @Test
-    public void teste_35_nao_deve_validar_equals_com_campos_divergentes() {
+    public void teste_41_nao_deve_validar_equals_com_campos_divergentes() {
         assertFalse(this.endereco.equals(this.enderecoTestes));
     }
 
     @Test
-    public void teste_36_nao_deve_validar_equals_nulo() {
+    public void teste_42_nao_deve_validar_equals_nulo() {
         assertFalse(this.endereco.equals(null));
     }
 
     @Test
-    public void teste_37_nao_deve_validar_equals_com_classes_divergentes() {
+    public void teste_43_nao_deve_validar_equals_com_classes_divergentes() {
         assertFalse(this.endereco.equals(new Object()));
     }
     
     @Test
-    public void teste_38_nao_deve_validar_equals_objetos_divergentes_numero_divergente() {
+    public void teste_44_nao_deve_validar_equals_objetos_divergentes_numero_divergente() {
         Endereco e = new Endereco(CEP_DEFAULT, NUMERO_TESTES);
         assertFalse(this.endereco.equals(e));
     }
     
     @Test
-    public void teste_39_nao_deve_validar_equals_objetos_divergentes_cep_divergente() {
+    public void teste_45_nao_deve_validar_equals_objetos_divergentes_cep_divergente() {
         Endereco e = new Endereco(CEP_TESTES, NUMERO_DEFAULT);
         assertFalse(this.endereco.equals(e));
     }
     
     @Test
-    public void teste_40_deve_validar_equals_objetos_divergentes_campos_iguais() {
+    public void teste_46_deve_validar_equals_objetos_divergentes_campos_iguais() {
         Endereco e = new Endereco(CEP_DEFAULT, NUMERO_DEFAULT);
         assertTrue(this.endereco.equals(e));
     }

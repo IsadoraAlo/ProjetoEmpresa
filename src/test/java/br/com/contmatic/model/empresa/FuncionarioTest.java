@@ -17,8 +17,6 @@ import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.ST
 import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.DDD_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.DDI_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.NUMERO_DEFAULT;
-import static br.com.contmatic.model.utils.constantes.contato.EmailTestConstantes.ENDERECO_DEFAULT;
-import static br.com.contmatic.model.utils.constantes.contato.EmailTestConstantes.TIPO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaTestConstantes.CNPJ_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioTestConstantes.CPF_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioTestConstantes.CPF_TESTES;
@@ -42,6 +40,7 @@ import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConst
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConstantes.NOME_MUNICIPIO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConstantes.NOME_UF_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConstantes.SIGLA_UF_DEFAULT;
+import static br.com.contmatic.model.utils.constantes.endereco.EnderecoTestConstantes.TIPO_LOGRADOURO_DEFAULT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -59,8 +58,6 @@ import org.junit.runners.MethodSorters;
 
 import br.com.contmatic.model.contato.Celular;
 import br.com.contmatic.model.contato.Contato;
-import br.com.contmatic.model.contato.Email;
-import br.com.contmatic.model.contato.Telefone;
 import br.com.contmatic.model.endereco.Endereco;
 import br.com.contmatic.model.endereco.Municipio;
 import br.com.contmatic.model.endereco.UF;
@@ -85,16 +82,10 @@ public class FuncionarioTest {
 
     @Before
     public void iniciar_testes() {
-        List<Email> emails = new ArrayList<Email>();
-        emails.add(new Email(ENDERECO_DEFAULT, TIPO_DEFAULT));
-
         List<Celular> celulares = new ArrayList<Celular>();
         celulares.add(new Celular(NUMERO_DEFAULT, DDD_DEFAULT, DDI_DEFAULT));
 
-        List<Telefone> telefones = new ArrayList<Telefone>();
-        telefones.add(new Telefone(NUMERO_DEFAULT, DDD_DEFAULT, DDI_DEFAULT));
-
-        this.contato = new Contato(emails, telefones, celulares);
+        this.contato = new Contato(celulares);
 
         UF uf = new UF(CODIGO_IBGE_UF_DEFAULT, NOME_UF_DEFAULT, SIGLA_UF_DEFAULT);
 
@@ -102,7 +93,7 @@ public class FuncionarioTest {
         
         this.empresa = new Empresa(CNPJ_DEFAULT);
 
-        this.endereco = new Endereco(CEP_DEFAULT, NUMERO_ENDERECO_DEFAULT, BAIRRO_DEFAULT, municipio, LOGRADOURO_DEFAULT, COMPLEMENTO_DEFAULT);
+        this.endereco = new Endereco(CEP_DEFAULT, NUMERO_ENDERECO_DEFAULT, BAIRRO_DEFAULT, municipio, TIPO_LOGRADOURO_DEFAULT, LOGRADOURO_DEFAULT, COMPLEMENTO_DEFAULT);
 
         this.funcionario = new Funcionario(CPF_DEFAULT, empresa, NOME_COMPLETO_DEFAULT, DATA_NASCIMENTO_DEFAULT, SEXO_FEMININO);
         this.funcionarioTestes = new Funcionario(CPF_TESTES, empresa);
@@ -821,6 +812,24 @@ public class FuncionarioTest {
     @Test
     public void teste_120_nao_deve_validar_equals_com_classes_divergentes() {
         assertFalse(this.funcionario.equals(new Object()));
+    }
+    
+    @Test
+    public void teste_121_nao_deve_validar_equals_objetos_divergentes_cpf_divergente() {
+        Funcionario f = new Funcionario("73128837023", empresa);
+        assertFalse(this.funcionario.equals(f));
+    }
+
+    @Test
+    public void teste_122_nao_deve_validar_equals_objetos_divergentes_empresa_divergente() {
+        Funcionario f = new Funcionario(CPF_DEFAULT, new Empresa("46123716000187"));
+        assertFalse(this.funcionario.equals(f));
+    }
+    
+    @Test
+    public void teste_123_deve_validar_equals_objetos_divergentes_campos_iguais() {
+        Funcionario f = new Funcionario(CPF_DEFAULT, empresa);
+        assertTrue(this.funcionario.equals(f));
     }
 
 }

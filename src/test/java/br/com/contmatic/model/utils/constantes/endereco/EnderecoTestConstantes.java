@@ -5,6 +5,8 @@ public class EnderecoTestConstantes {
     public static final String CEP_DEFAULT = "08180310";
 
     public static final String BAIRRO_DEFAULT = "Vila Santo Antônio";
+    
+    public static final String TIPO_LOGRADOURO_DEFAULT = "Comercial";
 
     public static final String LOGRADOURO_DEFAULT = "Dariana Circulo";
 

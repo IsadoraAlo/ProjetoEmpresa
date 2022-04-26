@@ -133,4 +133,17 @@ public abstract class Auditoria {
         this.dataAlteracao = dataAlteracao;
     }
 
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append("Auditoria [usuarioCriacao=").append(usuarioCriacao)
+                .append(", ipCriacao=").append(ipCriacao)
+                .append(", dataCriacao=").append(dataCriacao)
+                .append(", .append(usuarioAlteracao=").append(usuarioAlteracao)
+                .append(", ipAlteracao=").append(ipAlteracao)
+                .append(", dataAlteracao=").append(dataAlteracao)
+                .append("]")
+                .toString();
+    }
+
 }

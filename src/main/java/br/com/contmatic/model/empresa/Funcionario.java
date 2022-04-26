@@ -40,7 +40,6 @@ import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstan
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_RG_BRANCO;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_RG_INVALIDO;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_RG_NULO;
-import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_RG_QTDE_CARACTERES;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_SEXO_BRANCO;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_SEXO_CARACTERES_INVALIDO;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_SEXO_NULO;
@@ -60,8 +59,6 @@ import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstan
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_NOME_COMPLETO_MIN;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_NOME_SOCIAL_MAX;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_NOME_SOCIAL_MIN;
-import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_RG_MAX;
-import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_RG_MIN;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_SEXO_MAX;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_SEXO_MIN;
 import static br.com.contmatic.model.utils.validacao.Util.validarApenasAlfabeticos;
@@ -207,7 +204,6 @@ public class Funcionario extends Auditoria {
     public void setRg(String rg) {
         validarNulo(rg, MSG_RG_NULO);
         validarEspacos(rg, MSG_RG_BRANCO);
-        validarQuantidadeCaracteresString(rg, TAMANHO_RG_MAX, TAMANHO_RG_MIN, MSG_RG_QTDE_CARACTERES);
         validarRg(rg, MSG_RG_INVALIDO);
         this.rg = rg;
     }
@@ -290,7 +286,7 @@ public class Funcionario extends Auditoria {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cpf);
+        return Objects.hash(cpf, empresa);
     }
 
     @Override
@@ -302,9 +298,10 @@ public class Funcionario extends Auditoria {
         if (getClass() != obj.getClass())
             return false;
         Funcionario other = (Funcionario) obj;
-        return Objects.equals(cpf, other.cpf);
+        return Objects.equals(cpf, other.cpf) && Objects.equals(empresa, other.empresa);
     }
 
+    //TODO AUDITORIA
     @Override
     public String toString() {
         return new StringBuilder()

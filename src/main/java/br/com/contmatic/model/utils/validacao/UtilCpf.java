@@ -29,57 +29,58 @@ public final class UtilCpf {
 
     private static char calculoSegundoDigito(String cpf) {
         char dig11;
-        int sm = 0;
-        int r;
+        int soma = 0;
         int peso = PESO_SEGUNDO_DIGITO;
-        sm = conversaoSegundoDigito(cpf, sm, peso);
-        r = DIGITO_VERIFICADOR_11 - (sm % DIGITO_VERIFICADOR_11);
-        if ((r == DIGITO_VERIFICADOR_10) || (r == DIGITO_VERIFICADOR_11))
+        soma = conversaoSegundoDigito(cpf, soma, peso);
+        int resto = DIGITO_VERIFICADOR_11 - (soma % DIGITO_VERIFICADOR_11);
+        if ((resto == DIGITO_VERIFICADOR_10) || (resto == DIGITO_VERIFICADOR_11)) {
             dig11 = '0';
-        else
-            dig11 = (char) (r + POSICAO_0_TABELA_ASCII);
+        } else {
+            dig11 = (char) (resto + POSICAO_0_TABELA_ASCII);
+        }
         return dig11;
     }
 
-    private static int conversaoSegundoDigito(String cpf, int sm, int peso) {
-        int i;
+    private static int conversaoSegundoDigito(String cpf, int soma, int peso) {
         int num;
-        for(i = 0 ; i < POSICAO_DIGITO_10 ; i++) {
-            num = (int) (cpf.charAt(i) - POSICAO_0_TABELA_ASCII);
-            sm = sm + (num * peso);
+        for(int i = 0 ; i < POSICAO_DIGITO_10 ; i++) {
+            num = (cpf.charAt(i) - POSICAO_0_TABELA_ASCII);
+            soma = soma + (num * peso);
             peso--;
         }
-        return sm;
+        return soma;
     }
 
     private static char calculoPrimeiroDigito(String cpf) {
         char dig10;
-        int sm = 0;
-        int r;
+        int soma = 0;
         int peso = PESO_PRIMEIRO_DIGITO;
-        sm = conversaoPrimeiroDigito(cpf, sm, peso);
-        r = DIGITO_VERIFICADOR_11 - (sm % DIGITO_VERIFICADOR_11);
-        if ((r == DIGITO_VERIFICADOR_10) || (r == DIGITO_VERIFICADOR_11))
+        soma = conversaoPrimeiroDigito(cpf, soma, peso);
+        int resto = DIGITO_VERIFICADOR_11 - (soma % DIGITO_VERIFICADOR_11);
+        if ((resto == DIGITO_VERIFICADOR_10) || (resto == DIGITO_VERIFICADOR_11)) {
             dig10 = '0';
-        else
-            dig10 = (char) (r + POSICAO_0_TABELA_ASCII);
+        } else {
+            dig10 = (char) (resto + POSICAO_0_TABELA_ASCII);
+        }
         return dig10;
     }
 
-    private static int conversaoPrimeiroDigito(String cpf, int sm, int peso) {
-        int i;
+    private static int conversaoPrimeiroDigito(String cpf, int soma, int peso) {
         int num;
-        for(i = 0 ; i < POSICAO_DIGITO_09 ; i++) {
-            num = (int) (cpf.charAt(i) - POSICAO_0_TABELA_ASCII);
-            sm = sm + (num * peso);
+        for(int i = 0 ; i < POSICAO_DIGITO_09 ; i++) {
+            num = (cpf.charAt(i) - POSICAO_0_TABELA_ASCII);
+            soma = soma + (num * peso);
             peso--;
         }
-        return sm;
+        return soma;
     }
 
     private static void validarDigitosIguais(String cpf) {
-        if (cpf.equals("00000000000") || cpf.equals("11111111111") || cpf.equals("22222222222") || cpf.equals("33333333333") || cpf.equals("44444444444") || cpf.equals("55555555555") ||
-            cpf.equals("66666666666") || cpf.equals("77777777777") || cpf.equals("88888888888") || cpf.equals("99999999999") || (cpf.length() != TAMANHO_MAX_CPF))
+        if (cpf.equals("00000000000") || cpf.equals("11111111111") || cpf.equals("22222222222") || cpf.equals("33333333333") || cpf.equals("44444444444") || 
+            cpf.equals("55555555555") || cpf.equals("66666666666") || cpf.equals("77777777777") || cpf.equals("88888888888") || cpf.equals("99999999999") || 
+           (cpf.length() != TAMANHO_MAX_CPF)) {
             throw new IllegalStateException("CPF inválido!");
+        }
     }
+    
 }

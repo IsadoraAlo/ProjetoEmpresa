@@ -1,8 +1,11 @@
 package br.com.contmatic.model.contato;
 
 import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.DDD_DEFAULT;
+import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.DDD_TESTES;
 import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.DDI_DEFAULT;
+import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.DDI_TESTES;
 import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.NUMERO_DEFAULT;
+import static br.com.contmatic.model.utils.constantes.contato.CelularTestConstantes.NUMERO_TESTES;
 import static br.com.contmatic.model.utils.constantes.contato.EmailTestConstantes.ENDERECO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.contato.EmailTestConstantes.TIPO_DEFAULT;
 import static org.junit.Assert.assertEquals;
@@ -29,7 +32,7 @@ public class ContatoTest {
 
     List<Email> emails;
 
-    List<Email> emailsTeste;
+    List<Celular> celularTeste;
 
     List<Celular> celulares;
 
@@ -45,17 +48,18 @@ public class ContatoTest {
         this.emails = new ArrayList<Email>();
         emails.add(new Email(ENDERECO_DEFAULT, TIPO_DEFAULT));
 
-        this.emailsTeste = new ArrayList<Email>();
-        emailsTeste.add(new Email("isadora@gmail.com.br"));
+        this.celularTeste = new ArrayList<Celular>();
+        celularTeste.add(new Celular(NUMERO_TESTES, DDD_TESTES, DDI_TESTES));
 
         this.celulares = new ArrayList<Celular>();
         celulares.add(new Celular(NUMERO_DEFAULT, DDD_DEFAULT, DDI_DEFAULT));
 
         this.telefones = new ArrayList<Telefone>();
         telefones.add(new Telefone(NUMERO_DEFAULT, DDD_DEFAULT, DDI_DEFAULT));
+        telefones.add(new Telefone(NUMERO_DEFAULT, DDD_DEFAULT, DDI_DEFAULT));
 
         this.contato = new Contato(emails, telefones, celulares);
-        this.contatoTestes = new Contato(emailsTeste);
+        this.contatoTestes = new Contato(celularTeste);
     }
 
     @After
@@ -110,21 +114,28 @@ public class ContatoTest {
         telefones.add(4, new Telefone(NUMERO_DEFAULT, DDD_DEFAULT, DDI_DEFAULT));
         contato.setTelefones(telefones);
     }
+    
+    @Test(expected = IllegalStateException.class)
+    public void teste_07_lista_telefone_menor_que_permitido() {
+        List<Telefone> t = new ArrayList<Telefone>();;
+        Contato c = new Contato(emails, t, celulares);
+        c.setTelefones(t);
+    }
 
     // CELULAR
 
     @Test(expected = IllegalArgumentException.class)
-    public void teste_07_nao_deve_aceitar_lista_celular_nulo() {
+    public void teste_08_nao_deve_aceitar_lista_celular_nulo() {
         this.contato.setCelulares(null);
     }
 
     @Test
-    public void teste_08_deve_validar_lista_celular_com_sucesso() {
+    public void teste_09_deve_validar_lista_celular_com_sucesso() {
         assertEquals(this.celulares, this.contato.getCelulares());
     }
 
     @Test(expected = IllegalStateException.class)
-    public void teste_09_lista_celular_maior_que_permitido() {
+    public void teste_10_lista_celular_maior_que_permitido() {
         celulares.add(1, new Celular(NUMERO_DEFAULT, DDD_DEFAULT, DDI_DEFAULT));
         celulares.add(2, new Celular(NUMERO_DEFAULT, DDD_DEFAULT, DDI_DEFAULT));
         celulares.add(3, new Celular(NUMERO_DEFAULT, DDD_DEFAULT, DDI_DEFAULT));
@@ -135,7 +146,7 @@ public class ContatoTest {
     // TO STRING
 
     @Test
-    public void teste_10_deve_validar_to_string() {
+    public void teste_11_deve_validar_to_string() {
         assertTrue(contato.toString().contains(NUMERO_DEFAULT));
         assertTrue(contato.toString().contains(DDD_DEFAULT));
         assertTrue(contato.toString().contains(DDI_DEFAULT));
@@ -146,34 +157,34 @@ public class ContatoTest {
     // HASH CODE
 
     @Test
-    public void teste_11_deve_validar_hash_code_equivalentes() {
+    public void teste_12_deve_validar_hash_code_equivalentes() {
         assertEquals(this.contato.hashCode(), this.contato.hashCode());
     }
 
     @Test
-    public void teste_12_deve_validar_hash_code_divergentes() {
+    public void teste_13_deve_validar_hash_code_divergentes() {
         assertFalse(this.contato.hashCode() == this.contatoTestes.hashCode());
     }
 
     // EQUALS
 
     @Test
-    public void teste_13_deve_validar_equals_com_campos_equivalentes() {
+    public void teste_14_deve_validar_equals_com_campos_equivalentes() {
         assertTrue(this.contato.equals(this.contato));
     }
 
     @Test
-    public void teste_14_nao_deve_validar_equals_com_campos_divergentes() {
+    public void teste_15_nao_deve_validar_equals_com_campos_divergentes() {
         assertFalse(this.contato.equals(this.contatoTestes));
     }
 
     @Test
-    public void teste_15_nao_deve_validar_equals_nulo() {
+    public void teste_16_nao_deve_validar_equals_nulo() {
         assertFalse(this.contato.equals(null));
     }
 
     @Test
-    public void teste_16_nao_deve_validar_equals_com_classes_divergentes() {
+    public void teste_17_nao_deve_validar_equals_com_classes_divergentes() {
         assertFalse(this.contato.equals(new Object()));
     }
 

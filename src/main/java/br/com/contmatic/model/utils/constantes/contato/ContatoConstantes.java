@@ -30,7 +30,7 @@ public final class ContatoConstantes {
 
     public static final Integer TAMANHO_TELEFONE_LISTA_MAX = 2;
 
-    public static final Integer TAMANHO_TELEFONE_LISTA_MIN = 1;
+    public static final Integer TAMANHO_TELEFONE_LISTA_MIN = 2;
 
     private ContatoConstantes() {
     }
