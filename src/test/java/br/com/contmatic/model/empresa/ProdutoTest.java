@@ -366,6 +366,14 @@ public class ProdutoTest {
     public void teste_54_deve_validar_to_string() {
         assertTrue(produto.toString().contains(CODIGO_BARRA_DEFAULT));
         assertTrue(produto.toString().contains(DESCRICAO_DEFAULT));
+        this.produto.setIpAlteracao(IP_ALTERACAO_DEFAULT);
+        this.produto.setIpCriacao(IP_CRIACAO_DEFAULT);
+        this.produto.setUsuarioAlteracao(USUARIO_ALTERACAO_DEFAULT);
+        this.produto.setUsuarioCriacao(USUARIO_CRIACAO_DEFAULT);
+        assertTrue(produto.getUsuarioCriacao().toString().contains(USUARIO_CRIACAO_DEFAULT));
+        assertTrue(produto.getUsuarioAlteracao().toString().contains(USUARIO_ALTERACAO_DEFAULT));
+        assertTrue(produto.getIpCriacao().toString().contains(IP_CRIACAO_DEFAULT ));
+        assertTrue(produto.getIpAlteracao().toString().contains(IP_ALTERACAO_DEFAULT));
     }
 
     // HASH CODE

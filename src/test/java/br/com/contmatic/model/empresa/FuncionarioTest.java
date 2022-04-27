@@ -570,7 +570,7 @@ public class FuncionarioTest {
 
     @Test(expected = IllegalStateException.class)
     public void teste_80_nao_deve_aceitar_cpf_primeiro_dig_invalido() {
-        this.funcionario.setCpf("74070649054");
+        this.funcionario.setCpf("74070649055");
     }
     
     @Test(expected = IllegalStateException.class)
@@ -789,6 +789,14 @@ public class FuncionarioTest {
         assertTrue(funcionario.toString().contains(CODIGO_IBGE_UF_DEFAULT));
         assertTrue(funcionario.toString().contains(NOME_UF_DEFAULT));
         assertTrue(funcionario.toString().contains(SIGLA_UF_DEFAULT));
+        this.funcionario.setIpAlteracao(IP_ALTERACAO_DEFAULT);
+        this.funcionario.setIpCriacao(IP_CRIACAO_DEFAULT);
+        this.funcionario.setUsuarioAlteracao(USUARIO_ALTERACAO_DEFAULT);
+        this.funcionario.setUsuarioCriacao(USUARIO_CRIACAO_DEFAULT);
+        assertTrue(funcionario.getUsuarioCriacao().toString().contains(USUARIO_CRIACAO_DEFAULT));
+        assertTrue(funcionario.getUsuarioAlteracao().toString().contains(USUARIO_ALTERACAO_DEFAULT));
+        assertTrue(funcionario.getIpCriacao().toString().contains(IP_CRIACAO_DEFAULT ));
+        assertTrue(funcionario.getIpAlteracao().toString().contains(IP_ALTERACAO_DEFAULT));
     }
 
     // HASH CODE
