@@ -1,13 +1,15 @@
 package br.com.contmatic.model.empresa;
 
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.DATA_HORA_100_ANOS_FUTURO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.DATA_HORA_100_ANOS_PASSADO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.DATA_HORA_INICIO_ANO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.HORA_ATUAL;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.IP_ALTERACAO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.IP_CRIACAO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.USUARIO_ALTERACAO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.USUARIO_CRIACAO_DEFAULT;
+import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_100_ANOS_FUTURO;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_100_ANOS_PASSADO;
-import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_300_ANOS_FUTURO;
-import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_ATUAL;
-import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_INICIO_ANO;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.ESPACO_BRANCO;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.STRING_ALFABETICA_1;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.STRING_ALFABETICA_75;
@@ -72,7 +74,7 @@ public class FuncionarioTest {
     Endereco endereco;
 
     Contato contato;
-    
+
     Empresa empresa;
 
     @BeforeClass
@@ -90,7 +92,7 @@ public class FuncionarioTest {
         UF uf = new UF(CODIGO_IBGE_UF_DEFAULT, NOME_UF_DEFAULT, SIGLA_UF_DEFAULT);
 
         Municipio municipio = new Municipio(CODIGO_IBGE_MUNICIPIO_DEFAULT, NOME_MUNICIPIO_DEFAULT, uf);
-        
+
         this.empresa = new Empresa(CNPJ_DEFAULT);
 
         this.endereco = new Endereco(CEP_DEFAULT, NUMERO_ENDERECO_DEFAULT, BAIRRO_DEFAULT, municipio, TIPO_LOGRADOURO_DEFAULT, LOGRADOURO_DEFAULT, COMPLEMENTO_DEFAULT);
@@ -136,12 +138,12 @@ public class FuncionarioTest {
     public void teste_05_nao_deve_aceitar_caracteres_invalidos_nome_completo() {
         this.funcionario.setNomeCompleto(STRING_CARACTERES_ESPECIAIS_10);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_06_nao_deve_aceitar_nome_completo_com_espaco_comeco() {
         this.funcionario.setNomeCompleto(" Julia huhu");
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_07_nao_deve_aceitar_nome_completo_com_espaco_final() {
         this.funcionario.setNomeCompleto("Julia huhu ");
@@ -341,7 +343,7 @@ public class FuncionarioTest {
         this.funcionario.setContato(this.contato);
         assertEquals(this.contato, this.funcionario.getContato());
     }
-    
+
     // CONTATO
 
     @Test(expected = IllegalArgumentException.class)
@@ -363,7 +365,7 @@ public class FuncionarioTest {
 
     @Test(expected = IllegalStateException.class)
     public void teste_46_nao_deve_aceitar_data_nascimento_muito_futura() {
-        this.funcionario.setDataNascimento(DATA_300_ANOS_FUTURO);
+        this.funcionario.setDataNascimento(DATA_100_ANOS_FUTURO);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -387,7 +389,7 @@ public class FuncionarioTest {
     @Test(expected = IllegalStateException.class)
     public void teste_50_nao_deve_aceitar_data_contratacao_muito_futura() {
         this.funcionario.setDataNascimento(DATA_NASCIMENTO_DEFAULT);
-        this.funcionario.setDataContratacao(DATA_300_ANOS_FUTURO);
+        this.funcionario.setDataContratacao(DATA_100_ANOS_FUTURO);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -422,7 +424,7 @@ public class FuncionarioTest {
     public void teste_55_nao_deve_aceitar_data_demissao_muito_futura() {
         this.funcionario.setDataNascimento(DATA_NASCIMENTO_DEFAULT);
         this.funcionario.setDataContratacao(DATA_CONTRATACAO_DEFAULT);
-        this.funcionario.setDataDemissao(DATA_300_ANOS_FUTURO);
+        this.funcionario.setDataDemissao(DATA_100_ANOS_FUTURO);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -461,7 +463,7 @@ public class FuncionarioTest {
     public void teste_60_nao_deve_aceitar_data_aposentadoria_muito_futura() {
         this.funcionario.setDataNascimento(DATA_NASCIMENTO_DEFAULT);
         this.funcionario.setDataContratacao(DATA_CONTRATACAO_DEFAULT);
-        this.funcionario.setDataAposentadoria(DATA_300_ANOS_FUTURO);
+        this.funcionario.setDataAposentadoria(DATA_100_ANOS_FUTURO);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -572,12 +574,12 @@ public class FuncionarioTest {
     public void teste_80_nao_deve_aceitar_cpf_primeiro_dig_invalido() {
         this.funcionario.setCpf("74070649055");
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void teste_81_nao_deve_validar_cpf_com_resto_0() {
         this.funcionario.setCpf("52704603000");
     }
-    
+
     @Test
     public void teste_82_deve_validar_cpf_com_sucesso() {
         this.funcionario.setCpf("70582518008");
@@ -725,51 +727,51 @@ public class FuncionarioTest {
 
     @Test(expected = IllegalStateException.class)
     public void teste_108_nao_deve_aceitar_data_criacao_muito_futura() {
-        this.funcionario.setDataCriacao(DATA_300_ANOS_FUTURO);
+        this.funcionario.setDataCriacao(DATA_HORA_100_ANOS_FUTURO);
     }
 
     @Test(expected = IllegalStateException.class)
     public void teste_109_nao_deve_aceitar_data_criacao_ultrapassada() {
-        this.funcionario.setDataCriacao(DATA_100_ANOS_PASSADO);
+        this.funcionario.setDataCriacao(DATA_HORA_100_ANOS_PASSADO);
     }
 
     @Test
     public void teste_110_deve_validar_data_criacao_com_sucesso() {
-        this.funcionario.setDataCriacao(DATA_ATUAL);
-        assertEquals(DATA_ATUAL, this.funcionario.getDataCriacao());
+        this.funcionario.setDataCriacao(HORA_ATUAL);
+        assertEquals(HORA_ATUAL, this.funcionario.getDataCriacao());
     }
 
     // DATA ALTERAÇÃO
 
     @Test(expected = IllegalArgumentException.class)
     public void teste_111_nao_deve_aceitar_data_alteracao_nulo() {
-        this.funcionario.setDataCriacao(DATA_INICIO_ANO);
+        this.funcionario.setDataCriacao(DATA_HORA_INICIO_ANO);
         this.funcionario.setDataAlteracao(null);
     }
 
     @Test(expected = IllegalStateException.class)
     public void teste_112_nao_deve_aceitar_data_alteracao_muito_futura() {
-        this.funcionario.setDataCriacao(DATA_INICIO_ANO);
-        this.funcionario.setDataAlteracao(DATA_300_ANOS_FUTURO);
+        this.funcionario.setDataCriacao(DATA_HORA_INICIO_ANO);
+        this.funcionario.setDataAlteracao(DATA_HORA_100_ANOS_FUTURO);
     }
 
     @Test(expected = IllegalStateException.class)
     public void teste_113_nao_deve_aceitar_data_alteracao_ultrapassada() {
-        this.funcionario.setDataCriacao(DATA_INICIO_ANO);
-        this.funcionario.setDataAlteracao(DATA_100_ANOS_PASSADO);
+        this.funcionario.setDataCriacao(DATA_HORA_INICIO_ANO);
+        this.funcionario.setDataAlteracao(DATA_HORA_100_ANOS_PASSADO);
     }
 
     @Test(expected = IllegalStateException.class)
     public void teste_114_nao_deve_validar_data_alteracao_menor_data_criacao() {
-        this.funcionario.setDataCriacao(DATA_ATUAL);
-        this.funcionario.setDataAlteracao(DATA_INICIO_ANO);
+        this.funcionario.setDataCriacao(HORA_ATUAL);
+        this.funcionario.setDataAlteracao(DATA_HORA_INICIO_ANO);
     }
 
     @Test
     public void teste_115_deve_validar_data_alteracao_com_sucesso() {
-        this.funcionario.setDataCriacao(DATA_INICIO_ANO);
-        this.funcionario.setDataAlteracao(DATA_ATUAL);
-        assertEquals(DATA_ATUAL, this.funcionario.getDataAlteracao());
+        this.funcionario.setDataCriacao(DATA_HORA_INICIO_ANO);
+        this.funcionario.setDataAlteracao(HORA_ATUAL);
+        assertEquals(HORA_ATUAL, this.funcionario.getDataAlteracao());
     }
 
     // TO STRING
@@ -795,7 +797,7 @@ public class FuncionarioTest {
         this.funcionario.setUsuarioCriacao(USUARIO_CRIACAO_DEFAULT);
         assertTrue(funcionario.getUsuarioCriacao().toString().contains(USUARIO_CRIACAO_DEFAULT));
         assertTrue(funcionario.getUsuarioAlteracao().toString().contains(USUARIO_ALTERACAO_DEFAULT));
-        assertTrue(funcionario.getIpCriacao().toString().contains(IP_CRIACAO_DEFAULT ));
+        assertTrue(funcionario.getIpCriacao().toString().contains(IP_CRIACAO_DEFAULT));
         assertTrue(funcionario.getIpAlteracao().toString().contains(IP_ALTERACAO_DEFAULT));
     }
 
@@ -832,7 +834,7 @@ public class FuncionarioTest {
     public void teste_122_nao_deve_validar_equals_com_classes_divergentes() {
         assertFalse(this.funcionario.equals(new Object()));
     }
-    
+
     @Test
     public void teste_123_nao_deve_validar_equals_objetos_divergentes_cpf_divergente() {
         Funcionario f = new Funcionario("73128837023", empresa);
@@ -844,7 +846,7 @@ public class FuncionarioTest {
         Funcionario f = new Funcionario(CPF_DEFAULT, new Empresa("46123716000187"));
         assertFalse(this.funcionario.equals(f));
     }
-    
+
     @Test
     public void teste_125_deve_validar_equals_objetos_divergentes_campos_iguais() {
         Funcionario f = new Funcionario(CPF_DEFAULT, empresa);

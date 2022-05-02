@@ -1,7 +1,12 @@
 package br.com.contmatic.model.auditoria;
 
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_ALTERACAO_DATA_CRIACAO_NULO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_ALTERACAO_INTERVALO_LIMIAR;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_ALTERACAO_INTERVALO_ULTRAPASSADO;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_ALTERACAO_MENOR_CRIACAO;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_ALTERACAO_NULO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_CRIACAO_INTERVALO_LIMIAR;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_CRIACAO_INTERVALO_ULTRAPASSADO;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_CRIACAO_NULO;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_IP_ALTERACAO_BRANCO;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_IP_ALTERACAO_CARACTERES_INVALIDO;
@@ -11,6 +16,14 @@ import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstan
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_IP_CRIACAO_CARACTERES_INVALIDO;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_IP_CRIACAO_NULO;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_IP_CRIACAO_QTDE_CARACTERES;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_ALTERACAO_BRANCO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_ALTERACAO_CARACTERES_INVALIDO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_ALTERACAO_NULO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_ALTERACAO_QTDE_CARACTERES;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_CRIACAO_BRANCO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_CRIACAO_CARACTERES_INVALIDO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_CRIACAO_NULO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_CRIACAO_QTDE_CARACTERES;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.TAMANHO_DATA_ALTERACAO_MAX;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.TAMANHO_DATA_ALTERACAO_MIN;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.TAMANHO_DATA_CRIACAO_MAX;
@@ -19,33 +32,20 @@ import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstan
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.TAMANHO_IP_ALTERACAO_MIN;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.TAMANHO_IP_CRIACAO_MAX;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.TAMANHO_IP_CRIACAO_MIN;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_ALTERACAO_DATA_CRIACAO_NULO;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_CRIACAO_NULO;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_CRIACAO_BRANCO;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.TAMANHO_USUARIO_CRIACAO_MAX;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.TAMANHO_USUARIO_CRIACAO_MIN;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_CRIACAO_QTDE_CARACTERES;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_CRIACAO_CARACTERES_INVALIDO;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_ALTERACAO_NULO;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_ALTERACAO_INTERVALO_ULTRAPASSADO;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_ALTERACAO_INTERVALO_LIMIAR;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_ALTERACAO_BRANCO;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_CRIACAO_INTERVALO_ULTRAPASSADO;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_DATA_CRIACAO_INTERVALO_LIMIAR;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.TAMANHO_USUARIO_ALTERACAO_MAX;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.TAMANHO_USUARIO_ALTERACAO_MIN;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_ALTERACAO_QTDE_CARACTERES;
-import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.MSG_USUARIO_ALTERACAO_CARACTERES_INVALIDO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.TAMANHO_USUARIO_CRIACAO_MAX;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaConstantes.TAMANHO_USUARIO_CRIACAO_MIN;
 import static br.com.contmatic.model.utils.validacao.Util.validarApenasNumericos;
-import static br.com.contmatic.model.utils.validacao.Util.validarTexto;
 import static br.com.contmatic.model.utils.validacao.Util.validarEspacos;
 import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCaracteresString;
+import static br.com.contmatic.model.utils.validacao.Util.validarTexto;
 import static br.com.contmatic.model.utils.validacao.UtilDate.validarDataFinalMenorInicial;
 import static br.com.contmatic.model.utils.validacao.UtilDate.validarIntervaloMaxAnos;
 import static br.com.contmatic.model.utils.validacao.UtilDate.validarIntervaloMinAnos;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public abstract class Auditoria {
 
@@ -53,13 +53,13 @@ public abstract class Auditoria {
 
     String ipCriacao;
 
-    LocalDate dataCriacao;
+    LocalDateTime dataCriacao;
 
     String usuarioAlteracao;
 
     String ipAlteracao;
 
-    LocalDate dataAlteracao;
+    LocalDateTime dataAlteracao;
 
     public String getUsuarioCriacao() {
         return usuarioCriacao;
@@ -85,11 +85,11 @@ public abstract class Auditoria {
         this.ipCriacao = ipCriacao;
     }
 
-    public LocalDate getDataCriacao() {
+    public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDate dataCriacao) {
+    public void setDataCriacao(LocalDateTime dataCriacao) {
         validarNulo(dataCriacao, MSG_DATA_CRIACAO_NULO);
         validarIntervaloMinAnos(dataCriacao, TAMANHO_DATA_CRIACAO_MIN, MSG_DATA_CRIACAO_INTERVALO_LIMIAR);
         validarIntervaloMaxAnos(dataCriacao, TAMANHO_DATA_CRIACAO_MAX, MSG_DATA_CRIACAO_INTERVALO_ULTRAPASSADO);
@@ -120,11 +120,11 @@ public abstract class Auditoria {
         this.ipAlteracao = ipAlteracao;
     }
 
-    public LocalDate getDataAlteracao() {
+    public LocalDateTime getDataAlteracao() {
         return dataAlteracao;
     }
 
-    public void setDataAlteracao(LocalDate dataAlteracao) {
+    public void setDataAlteracao(LocalDateTime dataAlteracao) {
         validarNulo(dataAlteracao, MSG_DATA_ALTERACAO_NULO);
         validarNulo(this.dataCriacao, MSG_DATA_ALTERACAO_DATA_CRIACAO_NULO);
         validarIntervaloMinAnos(dataAlteracao, TAMANHO_DATA_ALTERACAO_MIN, MSG_DATA_ALTERACAO_INTERVALO_LIMIAR);

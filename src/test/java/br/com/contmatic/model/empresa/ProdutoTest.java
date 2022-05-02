@@ -1,16 +1,16 @@
 package br.com.contmatic.model.empresa;
 
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.DATA_HORA_100_ANOS_FUTURO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.DATA_HORA_100_ANOS_PASSADO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.DATA_HORA_INICIO_ANO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.HORA_ATUAL;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.IP_ALTERACAO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.IP_CRIACAO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.USUARIO_ALTERACAO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.USUARIO_CRIACAO_DEFAULT;
-import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_100_ANOS_PASSADO;
-import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_300_ANOS_FUTURO;
-import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_ATUAL;
-import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_INICIO_ANO;
-import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.ESPACO_BRANCO;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.BIG_DECIMAL_99999999;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.BIG_DECIMAL_NEGATIVA_1;
+import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.ESPACO_BRANCO;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.INT_99999999;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.INT_NEGATIVA_1;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.STRING_ALFABETICA_1;
@@ -313,51 +313,51 @@ public class ProdutoTest {
 
     @Test(expected = IllegalStateException.class)
     public void teste_46_nao_deve_aceitar_data_criacao_muito_futura() {
-        this.produto.setDataCriacao(DATA_300_ANOS_FUTURO);
+        this.produto.setDataCriacao(DATA_HORA_100_ANOS_FUTURO);
     }
 
     @Test(expected = IllegalStateException.class)
     public void teste_47_nao_deve_aceitar_data_criacao_ultrapassada() {
-        this.produto.setDataCriacao(DATA_100_ANOS_PASSADO);
+        this.produto.setDataCriacao(DATA_HORA_100_ANOS_PASSADO);
     }
 
     @Test
     public void teste_48_deve_validar_data_criacao_com_sucesso() {
-        this.produto.setDataCriacao(DATA_ATUAL);
-        assertEquals(DATA_ATUAL, this.produto.getDataCriacao());
+        this.produto.setDataCriacao(HORA_ATUAL);
+        assertEquals(HORA_ATUAL, this.produto.getDataCriacao());
     }
 
     // DATA ALTERAÇÃO
 
     @Test(expected = IllegalArgumentException.class)
     public void teste_49_nao_deve_aceitar_data_alteracao_nulo() {
-        this.produto.setDataCriacao(DATA_INICIO_ANO);
+        this.produto.setDataCriacao(DATA_HORA_INICIO_ANO);
         this.produto.setDataAlteracao(null);
     }
 
     @Test(expected = IllegalStateException.class)
     public void teste_50_nao_deve_aceitar_data_alteracao_muito_futura() {
-        this.produto.setDataCriacao(DATA_INICIO_ANO);
-        this.produto.setDataAlteracao(DATA_300_ANOS_FUTURO);
+        this.produto.setDataCriacao(DATA_HORA_INICIO_ANO);
+        this.produto.setDataAlteracao(DATA_HORA_100_ANOS_FUTURO);
     }
 
     @Test(expected = IllegalStateException.class)
     public void teste_51_nao_deve_aceitar_data_alteracao_ultrapassada() {
-        this.produto.setDataCriacao(DATA_INICIO_ANO);
-        this.produto.setDataAlteracao(DATA_100_ANOS_PASSADO);
+        this.produto.setDataCriacao(DATA_HORA_INICIO_ANO);
+        this.produto.setDataAlteracao(DATA_HORA_100_ANOS_PASSADO);
     }
 
     @Test(expected = IllegalStateException.class)
     public void teste_52_nao_deve_validar_data_alteracao_menor_data_criacao() {
-        this.produto.setDataCriacao(DATA_ATUAL);
-        this.produto.setDataAlteracao(DATA_INICIO_ANO);
+        this.produto.setDataCriacao(HORA_ATUAL);
+        this.produto.setDataAlteracao(DATA_HORA_INICIO_ANO);
     }
 
     @Test
     public void teste_53_deve_validar_data_alteracao_com_sucesso() {
-        this.produto.setDataCriacao(DATA_INICIO_ANO);
-        this.produto.setDataAlteracao(DATA_ATUAL);
-        assertEquals(DATA_ATUAL, this.produto.getDataAlteracao());
+        this.produto.setDataCriacao(DATA_HORA_INICIO_ANO);
+        this.produto.setDataAlteracao(HORA_ATUAL);
+        assertEquals(HORA_ATUAL, this.produto.getDataAlteracao());
     }
 
     // TO STRING

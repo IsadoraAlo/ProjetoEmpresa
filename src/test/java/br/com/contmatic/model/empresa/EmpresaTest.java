@@ -1,13 +1,13 @@
 package br.com.contmatic.model.empresa;
 
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.DATA_HORA_100_ANOS_FUTURO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.DATA_HORA_100_ANOS_PASSADO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.DATA_HORA_INICIO_ANO;
+import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.HORA_ATUAL;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.IP_ALTERACAO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.IP_CRIACAO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.USUARIO_ALTERACAO_DEFAULT;
 import static br.com.contmatic.model.utils.constantes.auditoria.AuditoriaTestConstantes.USUARIO_CRIACAO_DEFAULT;
-import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_100_ANOS_PASSADO;
-import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_300_ANOS_FUTURO;
-import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_ATUAL;
-import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.DATA_INICIO_ANO;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.ESPACO_BRANCO;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.STRING_ALFABETICA_1;
 import static br.com.contmatic.model.utils.constantes.comuns.ConstantesComuns.STRING_ALFABETICA_75;
@@ -488,51 +488,51 @@ public class EmpresaTest {
 
     @Test(expected = IllegalStateException.class)
     public void teste_70_nao_deve_aceitar_data_criacao_muito_futura() {
-        this.empresa.setDataCriacao(DATA_300_ANOS_FUTURO);
+        this.empresa.setDataCriacao(DATA_HORA_100_ANOS_FUTURO);
     }
 
     @Test(expected = IllegalStateException.class)
     public void teste_71_nao_deve_aceitar_data_criacao_ultrapassada() {
-        this.empresa.setDataCriacao(DATA_100_ANOS_PASSADO);
+        this.empresa.setDataCriacao(DATA_HORA_100_ANOS_PASSADO);
     }
 
     @Test
     public void teste_72_deve_validar_data_criacao_com_sucesso() {
-        this.empresa.setDataCriacao(DATA_ATUAL);
-        assertEquals(DATA_ATUAL, this.empresa.getDataCriacao());
+        this.empresa.setDataCriacao(HORA_ATUAL);
+        assertEquals(HORA_ATUAL, this.empresa.getDataCriacao());
     }
 
     // DATA ALTERAÇÃO
 
     @Test(expected = IllegalArgumentException.class)
     public void teste_73_nao_deve_aceitar_data_alteracao_nulo() {
-        this.empresa.setDataCriacao(DATA_INICIO_ANO);
+        this.empresa.setDataCriacao(DATA_HORA_INICIO_ANO);
         this.empresa.setDataAlteracao(null);
     }
 
     @Test(expected = IllegalStateException.class)
     public void teste_74_nao_deve_aceitar_data_alteracao_muito_futura() {
-        this.empresa.setDataCriacao(DATA_INICIO_ANO);
-        this.empresa.setDataAlteracao(DATA_300_ANOS_FUTURO);
+        this.empresa.setDataCriacao(DATA_HORA_INICIO_ANO);
+        this.empresa.setDataAlteracao(DATA_HORA_100_ANOS_FUTURO);
     }
 
     @Test(expected = IllegalStateException.class)
     public void teste_75_nao_deve_aceitar_data_alteracao_ultrapassada() {
-        this.empresa.setDataCriacao(DATA_INICIO_ANO);
-        this.empresa.setDataAlteracao(DATA_100_ANOS_PASSADO);
+        this.empresa.setDataCriacao(DATA_HORA_INICIO_ANO);
+        this.empresa.setDataAlteracao(DATA_HORA_100_ANOS_PASSADO);
     }
 
     @Test(expected = IllegalStateException.class)
     public void teste_76_nao_deve_validar_data_alteracao_menor_data_criacao() {
-        this.empresa.setDataCriacao(DATA_ATUAL);
-        this.empresa.setDataAlteracao(DATA_INICIO_ANO);
+        this.empresa.setDataCriacao(HORA_ATUAL);
+        this.empresa.setDataAlteracao(DATA_HORA_INICIO_ANO);
     }
 
     @Test
     public void teste_77_deve_validar_data_alteracao_com_sucesso() {
-        this.empresa.setDataCriacao(DATA_INICIO_ANO);
-        this.empresa.setDataAlteracao(DATA_ATUAL);
-        assertEquals(DATA_ATUAL, this.empresa.getDataAlteracao());
+        this.empresa.setDataCriacao(DATA_HORA_INICIO_ANO);
+        this.empresa.setDataAlteracao(HORA_ATUAL);
+        assertEquals(HORA_ATUAL, this.empresa.getDataAlteracao());
     }
 
     // TO STRING

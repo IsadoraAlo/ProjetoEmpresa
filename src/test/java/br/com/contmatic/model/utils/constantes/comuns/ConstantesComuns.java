@@ -29,7 +29,7 @@ public class ConstantesComuns {
 
     public static final BigDecimal BIG_DECIMAL_NEGATIVA_1 = new BigDecimal("-1.0");
 
-    public static final LocalDate DATA_300_ANOS_FUTURO = LocalDate.of(2122, 01, 01);
+    public static final LocalDate DATA_100_ANOS_FUTURO = LocalDate.of(2122, 01, 01);
 
     public static final LocalDate DATA_100_ANOS_PASSADO = LocalDate.of(1922, 01, 01);
 
