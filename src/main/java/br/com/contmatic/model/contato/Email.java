@@ -17,8 +17,11 @@ import static br.com.contmatic.model.utils.validacao.Util.validarEmail;
 import static br.com.contmatic.model.utils.validacao.Util.validarEspacos;
 import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCaracteresString;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
-import java.util.Objects;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Email {
 
@@ -61,28 +64,27 @@ public class Email {
 
     @Override
     public int hashCode() {
-        return Objects.hash(endereco);
+        return new HashCodeBuilder().append(endereco).toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Email other = (Email) obj;
-        return Objects.equals(endereco, other.endereco);
+        return new EqualsBuilder().append(this.endereco, other.endereco).isEquals();
     }
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append("Email [endereco=").append(endereco)
-                .append(", tipo=").append(tipo)
-                .append("]")
-                .toString();
+        return reflectionToString(this, JSON_STYLE);
     }
 
 }

@@ -14,9 +14,13 @@ import static br.com.contmatic.model.utils.constantes.contato.ContatoConstantes.
 import static br.com.contmatic.model.utils.constantes.contato.ContatoConstantes.TAMANHO_TELEFONE_LISTA_MIN;
 import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeElementoLista;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
 import java.util.List;
-import java.util.Objects;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Contato {
 
@@ -68,29 +72,27 @@ public class Contato {
 
     @Override
     public int hashCode() {
-        return Objects.hash(celulares);
+        return new HashCodeBuilder().append(celulares).toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Contato other = (Contato) obj;
-        return Objects.equals(celulares, other.celulares);
+        return new EqualsBuilder().append(this.celulares, other.celulares).isEquals();
     }
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append("Contato [telefones=").append(telefones)
-                .append(", emails=").append(emails)
-                .append(", celulares=").append(celulares)
-                .append("]")
-                .toString();
+        return reflectionToString(this, JSON_STYLE);
     }
 
 }

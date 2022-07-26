@@ -22,8 +22,11 @@ import static br.com.contmatic.model.utils.validacao.Util.validarApenasNumericos
 import static br.com.contmatic.model.utils.validacao.Util.validarEspacos;
 import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCaracteresString;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
-import java.util.Objects;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Telefone {
 
@@ -77,29 +80,27 @@ public class Telefone {
 
     @Override
     public int hashCode() {
-        return Objects.hash(ddd, ddi, numero);
+        return new HashCodeBuilder().append(ddd).append(ddi).append(numero).toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Telefone other = (Telefone) obj;
-        return Objects.equals(ddd, other.ddd) && Objects.equals(ddi, other.ddi) && Objects.equals(numero, other.numero);
+        return new EqualsBuilder().append(this.ddd, other.ddd).append(this.ddi, other.ddi).append(this.numero, other.numero).isEquals();
     }
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append("Telefone [numero=").append(numero)
-                .append(", ddd=").append(ddd)
-                .append(", ddi=").append(ddi)
-                .append("]")
-                .toString();
+        return reflectionToString(this, JSON_STYLE);
     }
 
 }
