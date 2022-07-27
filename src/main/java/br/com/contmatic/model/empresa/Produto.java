@@ -20,15 +20,19 @@ import static br.com.contmatic.model.utils.constantes.empresa.ProdutoConstantes.
 import static br.com.contmatic.model.utils.constantes.empresa.ProdutoConstantes.TAMANHO_PRECO_MIN;
 import static br.com.contmatic.model.utils.constantes.empresa.ProdutoConstantes.TAMANHO_QUANTIDADE_MAX;
 import static br.com.contmatic.model.utils.constantes.empresa.ProdutoConstantes.TAMANHO_QUANTIDADE_MIN;
+import static br.com.contmatic.model.utils.validacao.Util.limitarQuantidadeNumericaMaximaMinima;
 import static br.com.contmatic.model.utils.validacao.Util.validarApenasAlfanumericos;
 import static br.com.contmatic.model.utils.validacao.Util.validarEspacos;
 import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCaracteresString;
-import static br.com.contmatic.model.utils.validacao.Util.limitarQuantidadeNumericaMaximaMinima;
 import static br.com.contmatic.model.utils.validacao.Util.validarTexto;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
 import java.math.BigDecimal;
-import java.util.Objects;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import br.com.contmatic.model.auditoria.Auditoria;
 
@@ -98,33 +102,29 @@ public class Produto extends Auditoria {
         this.descricao = descricao;
     }
 
-    @Override
+    @Override   
     public int hashCode() {
-        return Objects.hash(codigoBarra);
+        return new HashCodeBuilder().append(codigoBarra).toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Produto other = (Produto) obj;
-        return Objects.equals(codigoBarra, other.codigoBarra);
+        return new EqualsBuilder().append(this.codigoBarra, other.codigoBarra).isEquals();
     }
 
     @Override
     public String toString() {
-        super.toString();
-        return new StringBuilder()
-                .append("Produto [preco=").append(preco)
-                .append(", codigoBarra=").append(codigoBarra)
-                .append(", quantidade=").append(quantidade)
-                .append(", descricao=").append(descricao)
-                .append("]")
-                .toString();                
+        return reflectionToString(this, JSON_STYLE);
     }
 
 }

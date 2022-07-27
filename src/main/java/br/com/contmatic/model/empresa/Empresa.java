@@ -1,5 +1,6 @@
 package br.com.contmatic.model.empresa;
 
+import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_ATIVA_NULO;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_CNPJ_BRANCO;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_CNPJ_NULO;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_CONTATO_NULO;
@@ -8,7 +9,6 @@ import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_FUNCIONARIO_LISTA_EXCEDIDA;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_FUNCIONARIO_NULO;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_NOME_FANTASIA_BRANCO;
-import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_ATIVA_NULO;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_NOME_FANTASIA_CARACTERES_INVALIDO;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_NOME_FANTASIA_NULO;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_NOME_FANTASIA_QTDE_CARACTERES;
@@ -34,9 +34,13 @@ import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCarac
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeElementoLista;
 import static br.com.contmatic.model.utils.validacao.Util.validarTexto;
 import static br.com.contmatic.model.utils.validacao.UtilCnpj.validarCNPJ;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
 import java.util.List;
-import java.util.Objects;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import br.com.contmatic.model.auditoria.Auditoria;
 import br.com.contmatic.model.contato.Contato;
@@ -49,7 +53,7 @@ public class Empresa extends Auditoria {
     private String nomeFantasia;
 
     private String razaoSocial;
-    
+
     private Boolean ativa = true;
 
     private Contato contato;
@@ -59,7 +63,7 @@ public class Empresa extends Auditoria {
     private List<Funcionario> funcionarios;
 
     private List<Produto> produtos;
-    
+
     public Empresa(String cnpj) {
         setCnpj(cnpj);
     }
@@ -114,7 +118,7 @@ public class Empresa extends Auditoria {
         validarTexto(razaoSocial, MSG_RAZAO_SOCIAL_CARACTERES_INVALIDO);
         this.razaoSocial = razaoSocial;
     }
-    
+
     public Boolean getAtiva() {
         return ativa;
     }
@@ -165,35 +169,27 @@ public class Empresa extends Auditoria {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cnpj);
+        return new HashCodeBuilder().append(cnpj).toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Empresa other = (Empresa) obj;
-        return Objects.equals(cnpj, other.cnpj);
+        return new EqualsBuilder().append(this.cnpj, other.cnpj).isEquals();
     }
 
     @Override
     public String toString() {
-        super.toString();
-        return new StringBuilder()
-                .append("Empresa [razaoSocial=").append(razaoSocial)
-                .append(", nomeFantasia=").append(nomeFantasia)
-                .append(", cnpj=").append(cnpj)
-                .append(", ativa=").append(ativa)
-                .append(", contato=").append(contato)
-                .append(", endereco=").append(enderecos)
-                .append(", funcionario=").append(funcionarios)
-                .append(", produto=").append(produtos)
-                .append("]")
-                .toString();
+        return reflectionToString(this, JSON_STYLE);
     }
 
 }

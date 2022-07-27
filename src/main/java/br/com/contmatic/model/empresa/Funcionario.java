@@ -73,9 +73,13 @@ import static br.com.contmatic.model.utils.validacao.UtilDate.validarIntervaloDi
 import static br.com.contmatic.model.utils.validacao.UtilDate.validarIntervaloMaxAnos;
 import static br.com.contmatic.model.utils.validacao.UtilDate.validarIntervaloMinAnos;
 import static java.time.LocalDate.now;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
 import java.time.LocalDate;
-import java.util.Objects;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import br.com.contmatic.model.auditoria.Auditoria;
 import br.com.contmatic.model.contato.Contato;
@@ -286,41 +290,27 @@ public class Funcionario extends Auditoria {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cpf, empresa);
+        return new HashCodeBuilder().append(cpf).append(empresa).toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Funcionario other = (Funcionario) obj;
-        return Objects.equals(cpf, other.cpf) && Objects.equals(empresa, other.empresa);
+        return new EqualsBuilder().append(this.cpf, other.cpf).append(this.empresa, other.empresa).isEquals();
     }
 
     @Override
     public String toString() {
-        super.toString();
-        return new StringBuilder()
-                .append("Funcionario [nomeCompleto=").append(nomeCompleto)
-                .append(", nomeSocial=").append(nomeSocial)
-                .append(", dataNascimento=").append(dataNascimento)
-                .append(", dataContratacao=").append(dataContratacao)
-                .append(", dataDemissao=").append(dataDemissao)
-                .append(", dataAposentadoria=").append(dataAposentadoria)
-                .append(", sexo=").append(sexo)
-                .append(", estadoCivil=").append(estadoCivil)
-                .append(", escolaridade=").append(escolaridade)
-                .append(", cpf=").append(cpf)
-                .append(", rg=").append(rg)
-                .append(", contato=").append(contato)
-                .append(", endereco=").append(endereco)
-                .append("]")
-                .toString();
-                
+        return reflectionToString(this, JSON_STYLE);
     }
 
 }
