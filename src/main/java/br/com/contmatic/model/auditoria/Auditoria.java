@@ -44,6 +44,8 @@ import static br.com.contmatic.model.utils.validacao.Util.validarTexto;
 import static br.com.contmatic.model.utils.validacao.UtilDate.validarDataFinalMenorInicial;
 import static br.com.contmatic.model.utils.validacao.UtilDate.validarIntervaloMaxAnos;
 import static br.com.contmatic.model.utils.validacao.UtilDate.validarIntervaloMinAnos;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
 import java.time.LocalDateTime;
 
@@ -135,15 +137,7 @@ public abstract class Auditoria {
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append("Auditoria [usuarioCriacao=").append(usuarioCriacao)
-                .append(", ipCriacao=").append(ipCriacao)
-                .append(", dataCriacao=").append(dataCriacao)
-                .append(", .append(usuarioAlteracao=").append(usuarioAlteracao)
-                .append(", ipAlteracao=").append(ipAlteracao)
-                .append(", dataAlteracao=").append(dataAlteracao)
-                .append("]")
-                .toString();
+        return reflectionToString(this, JSON_STYLE);
     }
-
+    
 }
