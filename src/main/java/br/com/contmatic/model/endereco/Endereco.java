@@ -41,8 +41,11 @@ import static br.com.contmatic.model.utils.validacao.Util.validarEspacos;
 import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCaracteresString;
 import static br.com.contmatic.model.utils.validacao.Util.validarTexto;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
-import java.util.Objects;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Endereco {
 
@@ -156,33 +159,27 @@ public class Endereco {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cep, numero);
+        return new HashCodeBuilder().append(cep).append(numero).toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Endereco other = (Endereco) obj;
-        return Objects.equals(cep, other.cep) && Objects.equals(numero, other.numero);
+        return new EqualsBuilder().append(this.cep, other.cep).append(this.numero, other.numero).isEquals();
     }
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append("Endereco [cep=").append(cep)
-                .append(", bairro=").append(bairro)
-                .append(", municipio=").append(municipio)
-                .append(", logradouro=").append(logradouro)
-                .append(", tipoLogradouro=").append(tipoLogradouro)
-                .append(", numero=").append(numero)
-                .append(", complemento=").append(complemento)
-                .append("]")
-                .toString();
+        return reflectionToString(this, JSON_STYLE);
     }
 
 }

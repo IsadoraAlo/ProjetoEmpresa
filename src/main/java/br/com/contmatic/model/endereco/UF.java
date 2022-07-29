@@ -24,8 +24,11 @@ import static br.com.contmatic.model.utils.validacao.Util.validarEspacos;
 import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCaracteresString;
 import static br.com.contmatic.model.utils.validacao.Util.validarTexto;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
-import java.util.Objects;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class UF {
 
@@ -83,29 +86,27 @@ public class UF {
 
     @Override
     public int hashCode() {
-        return Objects.hash(codigoIbge);
+        return new HashCodeBuilder().append(codigoIbge).toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         UF other = (UF) obj;
-        return Objects.equals(codigoIbge, other.codigoIbge);
+        return new EqualsBuilder().append(this.codigoIbge, other.codigoIbge).isEquals();
     }
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append("UF [nome=").append(nome)
-                .append(", sigla=").append(sigla)
-                .append(", codigoIbge=").append(codigoIbge)
-                .append("]")
-                .toString();
+        return reflectionToString(this, JSON_STYLE);
     }
 
 }
