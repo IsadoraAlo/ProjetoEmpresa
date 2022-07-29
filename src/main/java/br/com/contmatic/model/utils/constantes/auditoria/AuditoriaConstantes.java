@@ -12,10 +12,6 @@ public class AuditoriaConstantes {
 
     public static final String MSG_USUARIO_CRIACAO_CARACTERES_INVALIDO = "Usuário de Criação possuí caracteres inválidos.";
 
-    public static final Integer TAMANHO_USUARIO_CRIACAO_MAX = 40;
-
-    public static final Integer TAMANHO_USUARIO_CRIACAO_MIN = 10;
-
     // IP CRIAÇÃO
 
     public static final String MSG_IP_CRIACAO_NULO = "IP da Criação é obrigatório!";
@@ -25,10 +21,6 @@ public class AuditoriaConstantes {
     public static final String MSG_IP_CRIACAO_QTDE_CARACTERES = "A quantidade máxima de caracteres foi excedida em IP da Criação.";
 
     public static final String MSG_IP_CRIACAO_CARACTERES_INVALIDO = "IP da Criação apenas aceita caracteres numéricos.";
-
-    public static final Integer TAMANHO_IP_CRIACAO_MAX = 12;
-
-    public static final Integer TAMANHO_IP_CRIACAO_MIN = 4;
 
     // DATA CRIAÇÃO
 
@@ -52,10 +44,6 @@ public class AuditoriaConstantes {
 
     public static final String MSG_USUARIO_ALTERACAO_CARACTERES_INVALIDO = "Usuário de Criação possuí caracteres inválidos.";
 
-    public static final Integer TAMANHO_USUARIO_ALTERACAO_MAX = 40;
-
-    public static final Integer TAMANHO_USUARIO_ALTERACAO_MIN = 10;
-
     // IP ALTERAÇÃO
 
     public static final String MSG_IP_ALTERACAO_NULO = "IP da Alteração é obrigatório!";
@@ -65,10 +53,6 @@ public class AuditoriaConstantes {
     public static final String MSG_IP_ALTERACAO_QTDE_CARACTERES = "A quantidade máxima de caracteres foi excedida em IP da Alteração.";
 
     public static final String MSG_IP_ALTERACAO_CARACTERES_INVALIDO = "IP da Alteração apenas aceita caracteres numéricos.";
-
-    public static final Integer TAMANHO_IP_ALTERACAO_MAX = 12;
-
-    public static final Integer TAMANHO_IP_ALTERACAO_MIN = 4;
 
     // DATA ALTERAÇÃO
 
