@@ -12,28 +12,32 @@ import static br.com.contmatic.model.utils.constantes.contato.TelefoneConstantes
 import static br.com.contmatic.model.utils.constantes.contato.TelefoneConstantes.MSG_NUMERO_CARACTERES_INVALIDO;
 import static br.com.contmatic.model.utils.constantes.contato.TelefoneConstantes.MSG_NUMERO_NULO;
 import static br.com.contmatic.model.utils.constantes.contato.TelefoneConstantes.MSG_NUMERO_QTDE_CARACTERES;
-import static br.com.contmatic.model.utils.constantes.contato.TelefoneConstantes.TAMANHO_DDD_MAX;
-import static br.com.contmatic.model.utils.constantes.contato.TelefoneConstantes.TAMANHO_DDD_MIN;
-import static br.com.contmatic.model.utils.constantes.contato.TelefoneConstantes.TAMANHO_DDI_MAX;
-import static br.com.contmatic.model.utils.constantes.contato.TelefoneConstantes.TAMANHO_DDI_MIN;
-import static br.com.contmatic.model.utils.constantes.contato.TelefoneConstantes.TAMANHO_NUMERO_MAX;
-import static br.com.contmatic.model.utils.constantes.contato.TelefoneConstantes.TAMANHO_NUMERO_MIN;
 import static br.com.contmatic.model.utils.validacao.Util.validarApenasNumericos;
-import static br.com.contmatic.model.utils.validacao.Util.validarEspacos;
-import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
-import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCaracteresString;
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Telefone {
 
+    @NotNull(message = MSG_NUMERO_NULO)
+    @NotBlank(message = MSG_NUMERO_BRANCO)
+    @Size(message = MSG_NUMERO_QTDE_CARACTERES, min = 8, max = 9)
     private String numero;
 
+    @NotNull(message = MSG_DDD_NULO)
+    @NotBlank(message = MSG_DDD_BRANCO)
+    @Size(message = MSG_DDD_QTDE_CARACTERES, min = 2, max = 2)
     private String ddd;
 
+    @NotNull(message = MSG_DDI_NULO)
+    @NotBlank(message = MSG_DDI_BRANCO)
+    @Size(message = MSG_DDI_QTDE_CARACTERES, min = 2, max = 3)
     private String ddi;
 
     public Telefone(String numero, String ddd, String ddi) {
@@ -47,9 +51,6 @@ public class Telefone {
     }
 
     public void setNumero(String numero) {
-        validarNulo(numero, MSG_NUMERO_NULO);
-        validarEspacos(numero, MSG_NUMERO_BRANCO);
-        validarQuantidadeCaracteresString(numero, TAMANHO_NUMERO_MAX, TAMANHO_NUMERO_MIN, MSG_NUMERO_QTDE_CARACTERES);
         validarApenasNumericos(numero, MSG_NUMERO_CARACTERES_INVALIDO);
         this.numero = numero;
     }
@@ -59,9 +60,6 @@ public class Telefone {
     }
 
     public void setDdd(String ddd) {
-        validarNulo(ddd, MSG_DDD_NULO);
-        validarEspacos(ddd, MSG_DDD_BRANCO);
-        validarQuantidadeCaracteresString(ddd, TAMANHO_DDD_MAX, TAMANHO_DDD_MIN, MSG_DDD_QTDE_CARACTERES);
         validarApenasNumericos(ddd, MSG_DDD_CARACTERES_INVALIDO);
         this.ddd = ddd;
     }
@@ -71,9 +69,6 @@ public class Telefone {
     }
 
     public void setDdi(String ddi) {
-        validarNulo(ddi, MSG_DDI_NULO);
-        validarEspacos(ddi, MSG_DDI_BRANCO);
-        validarQuantidadeCaracteresString(ddi, TAMANHO_DDI_MAX, TAMANHO_DDI_MIN, MSG_DDI_QTDE_CARACTERES);
         validarApenasNumericos(ddi, MSG_DDI_CARACTERES_INVALIDO);
         this.ddi = ddi;
     }

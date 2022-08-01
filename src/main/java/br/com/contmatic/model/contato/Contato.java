@@ -6,28 +6,29 @@ import static br.com.contmatic.model.utils.constantes.contato.ContatoConstantes.
 import static br.com.contmatic.model.utils.constantes.contato.ContatoConstantes.MSG_EMAIL_NULO;
 import static br.com.contmatic.model.utils.constantes.contato.ContatoConstantes.MSG_TELEFONE_LISTA_EXCEDIDA;
 import static br.com.contmatic.model.utils.constantes.contato.ContatoConstantes.MSG_TELEFONE_NULO;
-import static br.com.contmatic.model.utils.constantes.contato.ContatoConstantes.TAMANHO_CELULAR_LISTA_MAX;
-import static br.com.contmatic.model.utils.constantes.contato.ContatoConstantes.TAMANHO_CELULAR_LISTA_MIN;
-import static br.com.contmatic.model.utils.constantes.contato.ContatoConstantes.TAMANHO_EMAIL_LISTA_MAX;
-import static br.com.contmatic.model.utils.constantes.contato.ContatoConstantes.TAMANHO_EMAIL_LISTA_MIN;
-import static br.com.contmatic.model.utils.constantes.contato.ContatoConstantes.TAMANHO_TELEFONE_LISTA_MAX;
-import static br.com.contmatic.model.utils.constantes.contato.ContatoConstantes.TAMANHO_TELEFONE_LISTA_MIN;
-import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
-import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeElementoLista;
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Contato {
 
+    @NotNull(message = MSG_TELEFONE_NULO)
+    @Size(message = MSG_TELEFONE_LISTA_EXCEDIDA, min = 2, max = 2)
     private List<Telefone> telefones;
 
+    @NotNull(message = MSG_EMAIL_NULO)
+    @Size(message = MSG_EMAIL_LISTA_EXCEDIDA, min = 1, max = 2)
     private List<Email> emails;
 
+    @NotNull(message = MSG_CELULAR_NULO)
+    @Size(message = MSG_CELULAR_LISTA_EXCEDIDA, min = 1, max = 2)
     private List<Celular> celulares;
 
     public Contato(List<Celular> celulares) {
@@ -45,8 +46,6 @@ public class Contato {
     }
 
     public void setTelefones(List<Telefone> telefones) {
-        validarNulo(telefones, MSG_TELEFONE_NULO);
-        validarQuantidadeElementoLista(telefones, TAMANHO_TELEFONE_LISTA_MAX, TAMANHO_TELEFONE_LISTA_MIN, MSG_TELEFONE_LISTA_EXCEDIDA);
         this.telefones = telefones;
     }
 
@@ -55,8 +54,6 @@ public class Contato {
     }
 
     public void setEmails(List<Email> emails) {
-        validarNulo(emails, MSG_EMAIL_NULO);
-        validarQuantidadeElementoLista(emails, TAMANHO_EMAIL_LISTA_MAX, TAMANHO_EMAIL_LISTA_MIN, MSG_EMAIL_LISTA_EXCEDIDA);
         this.emails = emails;
     }
 
@@ -65,8 +62,6 @@ public class Contato {
     }
 
     public void setCelulares(List<Celular> celulares) {
-        validarNulo(celulares, MSG_CELULAR_NULO);
-        validarQuantidadeElementoLista(celulares, TAMANHO_CELULAR_LISTA_MAX, TAMANHO_CELULAR_LISTA_MIN, MSG_CELULAR_LISTA_EXCEDIDA);
         this.celulares = celulares;
     }
 
