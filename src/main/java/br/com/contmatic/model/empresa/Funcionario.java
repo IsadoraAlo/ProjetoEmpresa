@@ -40,10 +40,7 @@ import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstan
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_RG_BRANCO;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_RG_INVALIDO;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_RG_NULO;
-import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_SEXO_BRANCO;
-import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_SEXO_CARACTERES_INVALIDO;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_SEXO_NULO;
-import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.MSG_SEXO_QTDE_CARACTERES;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_DATA_APOSENTADORIA_MAX;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_DATA_APOSENTADORIA_MIN;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_DATA_CONTRATACAO_FUTURA_MAX;
@@ -55,13 +52,6 @@ import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstan
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_ESCOLARIDADE_MIN;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_ESTADO_CIVIL_MAX;
 import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_ESTADO_CIVIL_MIN;
-import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_NOME_COMPLETO_MAX;
-import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_NOME_COMPLETO_MIN;
-import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_NOME_SOCIAL_MAX;
-import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_NOME_SOCIAL_MIN;
-import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_SEXO_MAX;
-import static br.com.contmatic.model.utils.constantes.empresa.FuncionarioConstantes.TAMANHO_SEXO_MIN;
-import static br.com.contmatic.model.utils.validacao.Util.validarApenasAlfabeticos;
 import static br.com.contmatic.model.utils.validacao.Util.validarEspacos;
 import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
 import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCaracteresString;
@@ -78,6 +68,10 @@ import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -87,11 +81,30 @@ import br.com.contmatic.model.endereco.Endereco;
 
 public class Funcionario extends Auditoria {
 
+    @NotNull(message = MSG_NOME_COMPLETO_NULO)
+    @NotBlank(message = MSG_NOME_COMPLETO_BRANCO)
+    @Size(message = MSG_NOME_COMPLETO_QTDE_CARACTERES, min = 10, max = 70)
     String nomeCompleto;
 
+    @NotNull(message = MSG_NOME_SOCIAL_NULO)
+    @NotBlank(message = MSG_NOME_SOCIAL_BRANCO)
+    @Size(message = MSG_NOME_SOCIAL_QTDE_CARACTERES, min = 10, max = 70)
     String nomeSocial;
 
-    String sexo;
+    @NotNull(message = MSG_SEXO_NULO)
+    public enum sexoType{
+  
+        FEMININO("Feminino"),
+        MASCULINO("Masculino"),
+        INDEFINIDO("Indefinido");
+        
+        @NotNull(message = "A descrição do sexo é obrigátorio!")
+        private String descricao;
+        
+        private sexoType(String descricao) {
+            this.descricao = descricao;
+        }
+    }
 
     String estadoCivil;
 
@@ -122,12 +135,11 @@ public class Funcionario extends Auditoria {
         setEmpresa(empresa);
     }
 
-    public Funcionario(String cpf, Empresa empresa, String nomeCompleto, LocalDate dataNascimento, String sexo) {
+    public Funcionario(String cpf, Empresa empresa, String nomeCompleto, LocalDate dataNascimento) {
         setCpf(cpf);
         setEmpresa(empresa);
         setNomeCompleto(nomeCompleto);
         setDataNascimento(dataNascimento);
-        setSexo(sexo);
     }
 
     public String getNomeCompleto() {
@@ -135,9 +147,6 @@ public class Funcionario extends Auditoria {
     }
 
     public void setNomeCompleto(String nomeCompleto) {
-        validarNulo(nomeCompleto, MSG_NOME_COMPLETO_NULO);
-        validarEspacos(nomeCompleto, MSG_NOME_COMPLETO_BRANCO);
-        validarQuantidadeCaracteresString(nomeCompleto, TAMANHO_NOME_COMPLETO_MAX, TAMANHO_NOME_COMPLETO_MIN, MSG_NOME_COMPLETO_QTDE_CARACTERES);
         validarTexto(nomeCompleto, MSG_NOME_COMPLETO_CARACTERES_INVALIDO);
         this.nomeCompleto = nomeCompleto;
     }
@@ -147,23 +156,8 @@ public class Funcionario extends Auditoria {
     }
 
     public void setNomeSocial(String nomeSocial) {
-        validarNulo(nomeSocial, MSG_NOME_SOCIAL_NULO);
-        validarEspacos(nomeSocial, MSG_NOME_SOCIAL_BRANCO);
-        validarQuantidadeCaracteresString(nomeSocial, TAMANHO_NOME_SOCIAL_MAX, TAMANHO_NOME_SOCIAL_MIN, MSG_NOME_SOCIAL_QTDE_CARACTERES);
         validarTexto(nomeSocial, MSG_NOME_SOCIAL_CARACTERES_INVALIDO);
         this.nomeSocial = nomeSocial;
-    }
-
-    public String getSexo() {
-        return this.sexo;
-    }
-
-    public void setSexo(String sexo) {
-        validarNulo(sexo, MSG_SEXO_NULO);
-        validarEspacos(sexo, MSG_SEXO_BRANCO);
-        validarQuantidadeCaracteresString(sexo, TAMANHO_SEXO_MAX, TAMANHO_SEXO_MIN, MSG_SEXO_QTDE_CARACTERES);
-        validarApenasAlfabeticos(sexo, MSG_SEXO_CARACTERES_INVALIDO);
-        this.sexo = sexo;
     }
 
     public String getEstadoCivil() {

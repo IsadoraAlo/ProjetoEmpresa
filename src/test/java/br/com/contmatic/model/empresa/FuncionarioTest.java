@@ -97,7 +97,7 @@ public class FuncionarioTest {
 
         this.endereco = new Endereco(CEP_DEFAULT, NUMERO_ENDERECO_DEFAULT, BAIRRO_DEFAULT, municipio, TIPO_LOGRADOURO_DEFAULT, LOGRADOURO_DEFAULT, COMPLEMENTO_DEFAULT);
 
-        this.funcionario = new Funcionario(CPF_DEFAULT, empresa, NOME_COMPLETO_DEFAULT, DATA_NASCIMENTO_DEFAULT, SEXO_FEMININO);
+        this.funcionario = new Funcionario(CPF_DEFAULT, empresa, NOME_COMPLETO_DEFAULT, DATA_NASCIMENTO_DEFAULT);
         this.funcionarioTestes = new Funcionario(CPF_TESTES, empresa);
     }
 
@@ -284,38 +284,6 @@ public class FuncionarioTest {
     public void teste_32_deve_validar_rg_com_sucesso() {
         this.funcionario.setRg(RG_DEFAULT);
         assertEquals(RG_DEFAULT, this.funcionario.getRg());
-    }
-
-    // SEXO
-
-    @Test(expected = IllegalArgumentException.class)
-    public void teste_33_nao_deve_aceitar_sexo_nulo() {
-        this.funcionario.setSexo(null);
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void teste_34_nao_deve_aceitar_sexo_em_branco() {
-        this.funcionario.setSexo(ESPACO_BRANCO);
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void teste_35_nao_deve_ultrapassar_qntd_caractere_max_sexo() {
-        this.funcionario.setSexo(STRING_ALFABETICA_75);
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void teste_36_nao_deve_limiar_qntd_caractere_min_sexo() {
-        this.funcionario.setSexo("");
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void teste_37_nao_deve_aceitar_caracteres_invalidos_sexo() {
-        this.funcionario.setSexo(STRING_CARACTERES_ESPECIAIS_10);
-    }
-
-    @Test
-    public void teste_38_deve_validar_sexo_com_sucesso() {
-        assertEquals(SEXO_FEMININO, this.funcionario.getSexo());
     }
 
     // ENDEREÇO

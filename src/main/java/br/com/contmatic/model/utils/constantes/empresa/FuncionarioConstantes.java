@@ -12,10 +12,6 @@ public final class FuncionarioConstantes {
 
     public static final String MSG_NOME_COMPLETO_CARACTERES_INVALIDO = "Nome Completo possuí caracteres inválidos";
 
-    public static final Integer TAMANHO_NOME_COMPLETO_MAX = 70;
-
-    public static final Integer TAMANHO_NOME_COMPLETO_MIN = 10;
-
     // NOME SOCIAL
 
     public static final String MSG_NOME_SOCIAL_NULO = "Nome Social é obrigatório!";
@@ -25,10 +21,6 @@ public final class FuncionarioConstantes {
     public static final String MSG_NOME_SOCIAL_QTDE_CARACTERES = "A quantidade de caracteres foi excedida em Nome Social.";
 
     public static final String MSG_NOME_SOCIAL_CARACTERES_INVALIDO = "Nome Social possuí caracteres inválidos";
-
-    public static final Integer TAMANHO_NOME_SOCIAL_MAX = 70;
-
-    public static final Integer TAMANHO_NOME_SOCIAL_MIN = 10;
 
     // DATA NASCIMENTO
 

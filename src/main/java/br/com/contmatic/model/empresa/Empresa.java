@@ -18,26 +18,16 @@ import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_RAZAO_SOCIAL_CARACTERES_INVALIDO;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_RAZAO_SOCIAL_NULO;
 import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.MSG_RAZAO_SOCIAL_QTDE_CARACTERES;
-import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.TAMANHO_ENDERECO_LISTA_MAX;
-import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.TAMANHO_ENDERECO_LISTA_MIN;
-import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.TAMANHO_FUNCIONARIO_LISTA_MAX;
-import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.TAMANHO_FUNCIONARIO_LISTA_MIN;
-import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.TAMANHO_NOME_FANTASIA_MAX;
-import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.TAMANHO_NOME_FANTASIA_MIN;
-import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.TAMANHO_PRODUTO_LISTA_MAX;
-import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.TAMANHO_PRODUTO_LISTA_MIN;
-import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.TAMANHO_RAZAO_SOCIAL_MAX;
-import static br.com.contmatic.model.utils.constantes.empresa.EmpresaConstantes.TAMANHO_RAZAO_SOCIAL_MIN;
-import static br.com.contmatic.model.utils.validacao.Util.validarEspacos;
-import static br.com.contmatic.model.utils.validacao.Util.validarNulo;
-import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeCaracteresString;
-import static br.com.contmatic.model.utils.validacao.Util.validarQuantidadeElementoLista;
 import static br.com.contmatic.model.utils.validacao.Util.validarTexto;
 import static br.com.contmatic.model.utils.validacao.UtilCnpj.validarCNPJ;
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
 import java.util.List;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -47,21 +37,37 @@ import br.com.contmatic.model.contato.Contato;
 import br.com.contmatic.model.endereco.Endereco;
 
 public class Empresa extends Auditoria {
-
+    
+    @NotNull(message = MSG_CNPJ_NULO)
+    @NotBlank(message = MSG_CNPJ_BRANCO)
     private String cnpj;
 
+    @NotNull(message = MSG_NOME_FANTASIA_NULO)
+    @NotBlank(message = MSG_NOME_FANTASIA_BRANCO)
+    @Size(message = MSG_NOME_FANTASIA_QTDE_CARACTERES, min = 6, max = 70)
     private String nomeFantasia;
 
+    @NotNull(message = MSG_RAZAO_SOCIAL_NULO)
+    @NotBlank(message = MSG_RAZAO_SOCIAL_BRANCO)
+    @Size(message = MSG_RAZAO_SOCIAL_QTDE_CARACTERES, min = 10, max = 70)
     private String razaoSocial;
 
+    @NotNull(message = MSG_ATIVA_NULO)
     private Boolean ativa = true;
 
+    @NotNull(message = MSG_CONTATO_NULO)
     private Contato contato;
 
+    @NotNull(message = MSG_ENDERECO_NULO)
+    @Size(message = MSG_ENDERECO_LISTA_EXCEDIDA, min = 1, max = 2)
     private List<Endereco> enderecos;
 
+    @NotNull(message = MSG_FUNCIONARIO_NULO)
+    @Size(message = MSG_FUNCIONARIO_LISTA_EXCEDIDA, min = 1, max = 2)
     private List<Funcionario> funcionarios;
 
+    @NotNull(message = MSG_PRODUTO_NULO)
+    @Size(message = MSG_PRODUTO_LISTA_EXCEDIDA, min = 1, max = 2) 
     private List<Produto> produtos;
 
     public Empresa(String cnpj) {
@@ -89,8 +95,6 @@ public class Empresa extends Auditoria {
     }
 
     public void setCnpj(String cnpj) {
-        validarNulo(cnpj, MSG_CNPJ_NULO);
-        validarEspacos(cnpj, MSG_CNPJ_BRANCO);
         validarCNPJ(cnpj);
         this.cnpj = cnpj;
     }
@@ -100,9 +104,6 @@ public class Empresa extends Auditoria {
     }
 
     public void setNomeFantasia(String nomeFantasia) {
-        validarNulo(nomeFantasia, MSG_NOME_FANTASIA_NULO);
-        validarEspacos(nomeFantasia, MSG_NOME_FANTASIA_BRANCO);
-        validarQuantidadeCaracteresString(nomeFantasia, TAMANHO_NOME_FANTASIA_MAX, TAMANHO_NOME_FANTASIA_MIN, MSG_NOME_FANTASIA_QTDE_CARACTERES);
         validarTexto(nomeFantasia, MSG_NOME_FANTASIA_CARACTERES_INVALIDO);
         this.nomeFantasia = nomeFantasia;
     }
@@ -112,9 +113,6 @@ public class Empresa extends Auditoria {
     }
 
     public void setRazaoSocial(String razaoSocial) {
-        validarNulo(razaoSocial, MSG_RAZAO_SOCIAL_NULO);
-        validarEspacos(razaoSocial, MSG_RAZAO_SOCIAL_BRANCO);
-        validarQuantidadeCaracteresString(razaoSocial, TAMANHO_RAZAO_SOCIAL_MAX, TAMANHO_RAZAO_SOCIAL_MIN, MSG_RAZAO_SOCIAL_QTDE_CARACTERES);
         validarTexto(razaoSocial, MSG_RAZAO_SOCIAL_CARACTERES_INVALIDO);
         this.razaoSocial = razaoSocial;
     }
@@ -124,7 +122,6 @@ public class Empresa extends Auditoria {
     }
 
     public void setAtiva(Boolean ativa) {
-        validarNulo(ativa, MSG_ATIVA_NULO);
         this.ativa = ativa;
     }
 
@@ -133,7 +130,6 @@ public class Empresa extends Auditoria {
     }
 
     public void setContato(Contato contato) {
-        validarNulo(contato, MSG_CONTATO_NULO);
         this.contato = contato;
     }
 
@@ -142,8 +138,6 @@ public class Empresa extends Auditoria {
     }
 
     public void setEndereco(List<Endereco> enderecos) {
-        validarNulo(enderecos, MSG_ENDERECO_NULO);
-        validarQuantidadeElementoLista(enderecos, TAMANHO_ENDERECO_LISTA_MAX, TAMANHO_ENDERECO_LISTA_MIN, MSG_ENDERECO_LISTA_EXCEDIDA);
         this.enderecos = enderecos;
     }
 
@@ -152,8 +146,6 @@ public class Empresa extends Auditoria {
     }
 
     public void setFuncionario(List<Funcionario> funcionarios) {
-        validarNulo(funcionarios, MSG_FUNCIONARIO_NULO);
-        validarQuantidadeElementoLista(funcionarios, TAMANHO_FUNCIONARIO_LISTA_MAX, TAMANHO_FUNCIONARIO_LISTA_MIN, MSG_FUNCIONARIO_LISTA_EXCEDIDA);
         this.funcionarios = funcionarios;
     }
 
@@ -162,8 +154,6 @@ public class Empresa extends Auditoria {
     }
 
     public void setProduto(List<Produto> produtos) {
-        validarNulo(produtos, MSG_PRODUTO_NULO);
-        validarQuantidadeElementoLista(produtos, TAMANHO_PRODUTO_LISTA_MAX, TAMANHO_PRODUTO_LISTA_MIN, MSG_PRODUTO_LISTA_EXCEDIDA);
         this.produtos = produtos;
     }
 
