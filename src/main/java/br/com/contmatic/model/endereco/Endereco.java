@@ -66,8 +66,7 @@ public class Endereco {
     }
 
     public Endereco(String cep, Integer numero, String bairro, Municipio municipio, String tipoLogradouro, String logradouro, String complemento) {
-        setCep(cep);
-        setNumero(numero);
+        this(cep, numero);
         setBairro(bairro);
         setMunicipio(municipio);
         setTipoLogradouro(tipoLogradouro);
@@ -161,12 +160,15 @@ public class Endereco {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Endereco other = (Endereco) obj;
         return Objects.equals(cep, other.cep) && Objects.equals(numero, other.numero);
     }

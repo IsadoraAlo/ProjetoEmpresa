@@ -40,7 +40,7 @@ public class UF {
     }
 
     public UF(String codigoIbge, String nome, String sigla) {
-        setCodigoIbge(codigoIbge);
+        this(codigoIbge);
         setNome(nome);
         setSigla(sigla);
     }
@@ -88,12 +88,15 @@ public class UF {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         UF other = (UF) obj;
         return Objects.equals(codigoIbge, other.codigoIbge);
     }

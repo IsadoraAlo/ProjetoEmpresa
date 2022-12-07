@@ -47,9 +47,8 @@ public class Produto extends Auditoria {
     }
 
     public Produto(String codigoBarra, BigDecimal preco, Integer quantidade, String descricao) {
-        super();
+        this(codigoBarra);
         setPreco(preco);
-        setCodigoBarra(codigoBarra);
         setQuantidade(quantidade);
         setDescricao(descricao);
     }
@@ -105,12 +104,15 @@ public class Produto extends Auditoria {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Produto other = (Produto) obj;
         return Objects.equals(codigoBarra, other.codigoBarra);
     }

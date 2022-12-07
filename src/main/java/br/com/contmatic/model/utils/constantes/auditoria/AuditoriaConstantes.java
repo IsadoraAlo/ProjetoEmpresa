@@ -1,6 +1,6 @@
 package br.com.contmatic.model.utils.constantes.auditoria;
 
-public class AuditoriaConstantes {
+public final class AuditoriaConstantes {
 
     // USUÁRIO CRIAÇÃO
 

@@ -1,15 +1,25 @@
 package br.com.contmatic.model.utils.validacao;
 
 public final class UtilCnpj {
+    
     private static final int POSICAO_0_TABELA_ASCII = 48;
+    
     private static final int TAMANHO_MAX_CNPJ = 14;
+    
     private static final int DIGITO_VERIFICADOR_0 = 0;
+    
     private static final int DIGITO_VERIFICADOR_1 = 1;
+    
     private static final int MODULO_DIVISAO = 11;
+    
     private static final int POSICAO_DIGITO_13 = 13;
+    
     private static final int POSICAO_DIGITO_12 = 12;
+    
     private static final int POSICAO_DIGITO_11 = 11;
+    
     private static final int POSICAO_DIGITO_10 = 10;
+    
     private static final int PESO_INICIAL = 2;
 
     private UtilCnpj() {
@@ -29,18 +39,21 @@ public final class UtilCnpj {
     }
 
     private static char calculoSegundoDigito(String cnpj) {
+        int resto = obterRestoSomaSegundoDigito(cnpj);
         char dig14;
-        int soma = 0;
-        int peso = PESO_INICIAL;
-        soma = conversaoSegundoDigito(cnpj, soma, peso);
-        int resto = soma % MODULO_DIVISAO;
-        
         if ((resto == DIGITO_VERIFICADOR_0) || (resto == DIGITO_VERIFICADOR_1)) {
             dig14 = '0';
         } else {
             dig14 = (char) ((MODULO_DIVISAO - resto) + POSICAO_0_TABELA_ASCII);
         }        
         return dig14;
+    }
+
+    private static int obterRestoSomaSegundoDigito(String cnpj) {
+        int soma = 0;
+        int peso = PESO_INICIAL;
+        soma = conversaoSegundoDigito(cnpj, soma, peso);
+        return soma % MODULO_DIVISAO;
     }
 
     private static int conversaoSegundoDigito(String cnpj, int soma, int peso) {
@@ -58,16 +71,20 @@ public final class UtilCnpj {
 
     private static char calculoPrimeiroDigito(String cnpj) {
         char dig13;
-        int soma = 0;
-        int peso = PESO_INICIAL;
-        soma = conversaoPrimeiroDigito(cnpj, soma, peso);
-        int resto = soma % MODULO_DIVISAO;
+        int resto = obterRestoSomaPrimeiroDigito(cnpj);
         if ((resto == DIGITO_VERIFICADOR_0) || (resto == DIGITO_VERIFICADOR_1)) {
             dig13 = '0';
         } else {
             dig13 = (char) ((MODULO_DIVISAO - resto) + POSICAO_0_TABELA_ASCII);
         }
         return dig13;
+    }
+
+    private static int obterRestoSomaPrimeiroDigito(String cnpj) {
+        int soma = 0;
+        int peso = PESO_INICIAL;
+        soma = conversaoPrimeiroDigito(cnpj, soma, peso);
+        return soma % MODULO_DIVISAO;
     }
 
     private static int conversaoPrimeiroDigito(String cnpj, int soma, int peso) {

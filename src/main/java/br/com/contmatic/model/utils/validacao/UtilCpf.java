@@ -3,12 +3,19 @@ package br.com.contmatic.model.utils.validacao;
 public final class UtilCpf {
 
     private static final int POSICAO_0_TABELA_ASCII = 48;
+    
     private static final int TAMANHO_MAX_CPF = 11;
+    
     private static final int DIGITO_VERIFICADOR_10 = 10;
+    
     private static final int DIGITO_VERIFICADOR_11 = 11;
+    
     private static final int POSICAO_DIGITO_09 = 9;
+    
     private static final int POSICAO_DIGITO_10 = 10;
+    
     private static final int PESO_SEGUNDO_DIGITO = 11;
+    
     private static final int PESO_PRIMEIRO_DIGITO = 10;
 
     private UtilCpf() {

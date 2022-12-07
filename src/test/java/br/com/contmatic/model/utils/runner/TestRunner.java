@@ -20,27 +20,21 @@ import br.com.contmatic.model.endereco.UFTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-  
-    // CLASSES DE CONTATO 
     CelularTest.class, ContatoTest.class, EmailTest.class, TelefoneTest.class,
-    
-    // CLASSES DE EMPRESA
     EmpresaTest.class, FuncionarioTest.class, ProdutoTest.class,
-    
-    // CLASSES DE ENDEREÇO
     EnderecoTest.class, MunicipioTest.class, UFTest.class,
-    
 })
 public class TestRunner {
     
     public static void main(String[] args) {
-        
         Result result = JUnitCore.runClasses(TestRunner.class);
-        
+        showFail(result);
+    }
+
+    private static void showFail(Result result) {
         for(Failure fail: result.getFailures()) {
             System.out.print(fail.toString());
         }
-        
     }
     
 }

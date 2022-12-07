@@ -110,8 +110,6 @@ public class Funcionario extends Auditoria {
     LocalDate dataDemissao;
 
     LocalDate dataAposentadoria;
-    
-
 
     public Funcionario(String cpf, Empresa empresa) {
         setCpf(cpf);
@@ -119,8 +117,7 @@ public class Funcionario extends Auditoria {
     }
 
     public Funcionario(String cpf, Empresa empresa, String nomeCompleto, LocalDate dataNascimento, String sexo) {
-        setCpf(cpf);
-        setEmpresa(empresa);
+        this(cpf, empresa);
         setNomeCompleto(nomeCompleto);
         setDataNascimento(dataNascimento);
         setSexo(sexo);
@@ -291,12 +288,15 @@ public class Funcionario extends Auditoria {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Funcionario other = (Funcionario) obj;
         return Objects.equals(cpf, other.cpf) && Objects.equals(empresa, other.empresa);
     }
@@ -320,7 +320,6 @@ public class Funcionario extends Auditoria {
                 .append(", endereco=").append(endereco)
                 .append("]")
                 .toString();
-                
     }
 
 }

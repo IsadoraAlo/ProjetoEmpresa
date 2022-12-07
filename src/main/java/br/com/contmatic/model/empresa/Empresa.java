@@ -65,15 +65,13 @@ public class Empresa extends Auditoria {
     }
 
     public Empresa(String cnpj, String nomeFantasia, String razaoSocial) {
-        setCnpj(cnpj);
+        this(cnpj);
         setNomeFantasia(nomeFantasia);
         setRazaoSocial(razaoSocial);
     }
 
     public Empresa(String cnpj, String nomeFantasia, String razaoSocial, Contato contato, List<Endereco> enderecos, List<Funcionario> funcionarios, List<Produto> produtos) {
-        setCnpj(cnpj);
-        setNomeFantasia(nomeFantasia);
-        setRazaoSocial(razaoSocial);
+        this(cnpj, nomeFantasia, razaoSocial);
         setContato(contato);
         setEndereco(enderecos);
         setFuncionario(funcionarios);
@@ -170,12 +168,15 @@ public class Empresa extends Auditoria {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Empresa other = (Empresa) obj;
         return Objects.equals(cnpj, other.cnpj);
     }
